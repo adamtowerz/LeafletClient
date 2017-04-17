@@ -6,7 +6,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import leafletTheme from './theme'
 
-
 // ========================================================
 // Store Instantiation
 // ========================================================

@@ -19,6 +19,6 @@ export default (store) => ({
       cb(null, Leaflet)
 
     /* Webpack named bundle   */
-  }, 'leaflet')
+    }, 'leaflet')
   }
 })

@@ -1,12 +1,10 @@
 import React from 'react'
-import { IndexLink, Link } from 'react-router'
 import PropTypes from 'prop-types'
 import './LeafletNav.scss'
 import LeafletPage from './LeafletPage.js'
 import IconButton from 'material-ui/IconButton'
 import IconChevronRight from 'material-ui/svg-icons/navigation/chevron-right'
 import IconChevronDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down'
-
 
 const styles = {
   sectionTitle: {
@@ -22,10 +20,12 @@ const styles = {
     listStyle: 'none',
     width: '100%'
   }
-  /*chevron: {
+  /*
+  chevron: {
     paddingLeft: 0,
     maxWidth: '25%'
-  }*/
+  }
+  */
 }
 /*
 props: {
@@ -38,43 +38,45 @@ props: {
     }
   ]
 }
-
 */
 
-
 export class LeafletSection extends React.Component {
-  constructor(props) {
-   super(props)
-   this.props = props
-   this.state = {isOpen: false}
+  constructor (props) {
+    super(props)
+    this.props = props
+    this.state = { isOpen: false }
   }
 
-  toggleOpen() {
+  toggleOpen = () => {
     this.setState((prevState, props) => {
-      return {isOpen: !prevState.isOpen }
+      return { isOpen: !prevState.isOpen }
     })
   }
 
-  render() {
+  render () {
     return <div>
-      <IconButton onClick={this.toggleOpen.bind(this)} style={styles.chevron}> {this.state.isOpen ? <IconChevronDown /> : <IconChevronRight />}</IconButton>
-      <span style={styles.sectionTitle}>{this.props.title}</span>
+      <IconButton onClick={this.toggleOpen} style={styles.chevron}>
+        {this.state.isOpen ? <IconChevronDown /> : <IconChevronRight />}
+      </IconButton>
+      <span style={styles.sectionTitle}>
+        {this.props.title}
+      </span>
       {this.state.isOpen ? <ul style={styles.ul}>
         {
          this.props.pages.map((p) => {
-            return <li key={p.title}><LeafletPage title={p.title} isFavorited={p.isFavorited} isSelected={p.isSelected}/></li>
+           return <li key={p.title}>
+             <LeafletPage title={p.title} isFavorited={p.isFavorited} isSelected={p.isSelected} />
+           </li>
          })
         }
-
-      </ul>
-      : null}
+      </ul> : null}
     </div>
   }
 }
 
 LeafletSection.propTypes = {
   title     : PropTypes.string.isRequired,
-  pages     : PropTypes.array.isRequired,
+  pages     : PropTypes.array.isRequired
 }
 
 export default LeafletSection

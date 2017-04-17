@@ -3,15 +3,17 @@ import { LeafletSection } from 'routes/Leaflet/components/LeafletNav/LeafletSect
 import { shallow } from 'enzyme'
 
 describe('(Component) LeafletSection', () => {
-  const props = {title: '10.3', pages: [
-    {title: '10.3.1 Molecular Dynamics', isFavorited: false, isSelected: false},
-    {title: '10.3.2 High Temperature Interactions', isFavorited: true, isSelected: true},
-    {title: '10.3.3 High Pressure Systems', isFavorited: false, isSelected: false}
-  ]}
+  const props = { title: '10.3',
+    pages: [
+      { title: '10.3.1 Molecular Dynamics', isFavorited: false, isSelected: false },
+      { title: '10.3.2 High Temperature Interactions', isFavorited: true, isSelected: true },
+      { title: '10.3.3 High Pressure Systems', isFavorited: false, isSelected: false }
+    ]
+  }
 
   let _component
   beforeEach(() => {
-    _component = shallow(<LeafletSection title={props.title} pages={props.pages}/>)
+    _component = shallow(<LeafletSection title={props.title} pages={props.pages} />)
   })
 
   it('Renders the title', () => {

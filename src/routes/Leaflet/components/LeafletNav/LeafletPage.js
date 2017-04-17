@@ -1,10 +1,7 @@
 import React from 'react'
-import { IndexLink, Link } from 'react-router'
 import PropTypes from 'prop-types'
 import './LeafletNav.scss'
-import IconButton from 'material-ui/IconButton'
 import IconFavorite from 'material-ui/svg-icons/action/favorite'
-
 
 const styles = {
   none: {
@@ -31,7 +28,7 @@ props: {
 
 export const LeafletPage = (props) => (
   <div>
-    {props.isFavorited ? <IconFavorite style={styles.favorite} /> : <span style={styles.favoriteFiller}/>}
+    {props.isFavorited ? <IconFavorite style={styles.favorite} /> : <span style={styles.favoriteFiller} />}
     <span className={props.isSelected ? 'leafletPageTitleSelected' : 'leafletPageTitle'}>{props.title}</span>
   </div>
 )
