@@ -18,14 +18,14 @@ const styles = {
   },
   ul: {
     listStyle: 'none',
-    width: '100%'
-  }
-  /*
+    width: '100%',
+    paddingLeft: '0'
+  },
   chevron: {
-    paddingLeft: 0,
-    maxWidth: '25%'
+    padding: 0,
+    width: '36px',
+    height: '36px'
   }
-  */
 }
 /*
 props: {
