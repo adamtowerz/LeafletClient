@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Zarkoix/Leaflet.svg?token=oT8VKpEzxEWbmhoh5pgb&branch=master)](https://travis-ci.com/Zarkoix/Leaflet)
+
 # Leaflet
 
 Modular Notetaking
