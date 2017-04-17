@@ -1,5 +1,6 @@
 import React from 'react'
 import './LeafletNav.scss'
+import PropTypes from 'prop-types'
 import LeafletSection from './LeafletSection.js'
 import TextField from 'material-ui/TextField'
 
@@ -13,22 +14,6 @@ props: {
  ]
 }
 */
-const tempProps = {
-  sections: [
-    { title: '10.3',
-      pages: [
-        { title: '10.3.1 Molecular Dynamics', isFavorited: false, isSelected: false },
-        { title: '10.3.2 High Temperature Interactions', isFavorited: true, isSelected: true },
-        { title: '10.3.3 High Pressure Systems', isFavorited: false, isSelected: false }
-      ]
-    },
-    { title: '10.4',
-      pages: [
-        { title: 'pepe', isFavorited: false, isSelected: false }
-      ]
-    }
-  ]
-}
 
 /*
 const styles = {
@@ -43,10 +28,14 @@ export const LeafletNav = (props) => (
     <TextField
       hintText='Search Leaflet'
     />
-    {tempProps.sections.map((section) =>
+    {props.sections.map((section) =>
       <LeafletSection key={section.title} title={section.title} pages={section.pages} />
     )}
   </div>
 )
+
+LeafletNav.propTypes = {
+  sections : PropTypes.string.isRequired
+}
 
 export default LeafletNav
