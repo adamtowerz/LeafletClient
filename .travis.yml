@@ -4,7 +4,7 @@ node_js:
   - "6"
 env:
   - CXX=g++-4.8
-  
+
 addons:
   apt:
     sources:
@@ -14,7 +14,6 @@ addons:
 
 cache:
   directories:
-    - node_modules
 
 install:
   - npm install -g yarn
