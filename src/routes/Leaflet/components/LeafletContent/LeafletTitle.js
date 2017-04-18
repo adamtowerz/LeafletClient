@@ -60,7 +60,6 @@ const styles = {
 props: {
   title: STRING,
   isFavorite: BOOLEAN,
-  isSelected: BOOLEAN
 }
 */
 
