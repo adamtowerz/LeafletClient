@@ -15,17 +15,15 @@ props: {
 }
 */
 
-/*
 const styles = {
   search: {
-    maxWidth: '100%'
+    width: '80%'
   }
 }
-*/
 
 export const LeafletNav = (props) => (
   <div>
-    <TextField
+    <TextField style={styles.search}
       hintText='Search Leaflet'
     />
     {props.sections.map((section) =>
@@ -35,7 +33,7 @@ export const LeafletNav = (props) => (
 )
 
 LeafletNav.propTypes = {
-  sections : PropTypes.string.isRequired
+  sections : PropTypes.array.isRequired
 }
 
 export default LeafletNav

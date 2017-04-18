@@ -5,9 +5,9 @@ import './CoreLayout.scss'
 import '../../styles/core.scss'
 
 export const CoreLayout = ({ children }) => (
-  <div className=''>
+  <div className='greedy'>
     <Header />
-    <div className='core-layout__viewport'>
+    <div className='core-layout__viewport greedy'>
       {children}
     </div>
   </div>

@@ -1,10 +1,13 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
-import { Grid, Row, Col } from 'react-bootstrap'
+// import { Row, Col } from 'react-bootstrap'
 import '../../../styles/core.scss'
-import LeafletNav from './LeafletNav'
+import _greedy from '../../../styles/greedy.js'
 
-const tempProps = {
+import LeafletNav from './LeafletNav'
+import LeafletContent from './LeafletContent'
+
+const tempPropsNav = {
   sections: [
     { title: '10.3',
       pages: [
@@ -21,20 +24,42 @@ const tempProps = {
   ]
 }
 
+const tempPropsContent = {
+  title: '10.3.2 High Temperature Interactions',
+  isFavorited: true,
+  leaves: []
+}
+
+const styles = {
+  navCol: {
+    width: '20%',
+    height: '100%',
+    display: 'inline-block',
+    float: 'left'
+  },
+  contentCol: {
+    width: '60%',
+    height: '100%',
+    display: 'inline-block'
+  },
+  dockCol: {
+    width: '20%',
+    height: '100%',
+    display: 'inline-block',
+    float: 'right'
+  }
+}
+
 export const Leaflet = (props) => (
-  <Grid>
-    <Row>
-      <Col xs={3}>
-        <LeafletNav sections={tempProps.sections} />
-      </Col>
-      <Col xs={7}>
-        2
-      </Col>
-      <Col xs={2}>
-        3
-      </Col>
-    </Row>
-  </Grid>
+  <div style={_greedy}>
+    <span style={styles.navCol}>
+      <LeafletNav sections={tempPropsNav.sections} />
+    </span>
+    <span style={styles.contentCol}>
+      <LeafletContent title={tempPropsContent.title} isFavorited={tempPropsContent.isFavorited} />
+    </span>
+    <span style={styles.dockCol} />
+  </div>
 )
 
 Leaflet.propTypes = {
