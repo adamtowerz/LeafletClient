@@ -15,6 +15,25 @@ const styles = {
     float: 'left',
     display: 'inline-block'
   },
+  titleCard: {
+    height: '100%',
+    width: '88%',
+    margin: '0 2%',
+    display: 'inline-block'
+  },
+  titleCardBox: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  titleActions: {
+    width: '5%',
+    height: '100%',
+    float: 'right',
+    display: 'inline-block'
+  },
   title: {
     fontWeight: '100',
     fontSize: '1.7em',
@@ -24,20 +43,7 @@ const styles = {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     width: '100%',
-    padding: '1.3em 0.2em',
     textAlign: 'center'
-  },
-  titleCard: {
-    height: '100%',
-    width: '88%',
-    margin: '0 2%',
-    display: 'inline-block'
-  },
-  titleActions: {
-    width: '5%',
-    height: '100%',
-    float: 'right',
-    display: 'inline-block'
   },
   titleAction: {
     height: '33%',
@@ -67,7 +73,9 @@ export const LeafletTitle = (props) => (
   <div style={{ width: '100%', height: '12%' }}>
     <Paper style={styles.emphasis} />
     <Paper style={styles.titleCard} children={
-      <span style={styles.title}>{props.title}</span>
+      <div style={styles.titleCardBox}>
+        <span style={styles.title}>{props.title}</span>
+      </div>
     } />
     <Paper style={styles.titleActions} children={
       <div style={styles.iconCol}>

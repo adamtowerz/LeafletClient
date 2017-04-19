@@ -10,14 +10,52 @@
   text-overflow: ellipsis;
   display: inline-block;
   max-width: 65%;
+  transition-property: opacity, font-size;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.leafletPageTitle:hover {
+  font-size: 1.1em;
+}
+
+.leafletPageTitle:hover .LeafletPageFav {
+  opacity: 0.56;
+  width: 1em !important;
+  height: 1em !important;
 }
 
 .leafletPageTitleSelected {
-  font-size: 1em;
+  @extend .leafletPageTitle;
   font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.leafletPageTitleSelected:hover {
+  @extend .leafletPageTitle:hover;
+}
+
+.leafletPageTitle:hover .leafletPageFavFiller {
+  opacity: 0.2;
+}
+
+.leafletPageFav {
+  width: 1em !important;
+  height: 1em !important;
+  opacity: 0.4;
   display: inline-block;
-  max-width: 65%;
+}
+
+.leafletPageFav:hover {
+  opacity: 1;
+}
+
+.leafletPageFavFiller {
+  width: 1em !important;
+  height: 1em !important;
+  opacity: 0;
+  display: inline-block;
+}
+
+.leafletPageFavFiller:hover {
+ opacity: 1 !important;
 }
