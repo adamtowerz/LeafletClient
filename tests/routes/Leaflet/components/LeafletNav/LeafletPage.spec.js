@@ -20,9 +20,10 @@ describe('(Component) LeafletPage', () => {
   })
 
   it('Should only shows heart when favorited', () => {
-    expect(_component.find('ActionFavorite')).to.not.exist
+    expect(_component.find('ActionFavorite').hasClass('leafletPageFav')).to.be.false
+    expect(_component.find('ActionFavorite').hasClass('leafletPageFavFiller')).to.be.true
     const favComponent = shallow(<LeafletPage title={props.title} isFavorited={t} isSelected={props.isSelected} />)
-    expect(favComponent.find('ActionFavorite')).to.exist
+    expect(favComponent.find('ActionFavorite').hasClass('leafletPageFav')).to.be.true
   })
 
   it('Should only bold when isSelected', () => {
