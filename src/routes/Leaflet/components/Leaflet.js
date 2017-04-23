@@ -42,9 +42,7 @@ export const Leaflet = (props) => {
           <Leaf key={i} leafID={leaf.leafID} />
         )) : null}
       </span>
-      <span style={styles.dockCol}>
-        {props.title}
-      </span>
+      <span style={styles.dockCol} />
       {typeof props.activePage === 'object'
         ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={props.newLeaf}>
           <i className='material-icons titleActionIcon'>add</i>
@@ -54,7 +52,6 @@ export const Leaflet = (props) => {
 }
 
 Leaflet.propTypes = {
-  title      : PropTypes.string.isRequired,
   leaves     : PropTypes.array.isRequired,
   newLeaf    : PropTypes.func.isRequired,
   activePage : PropTypes.any.isRequired // TODO: 'any' -> enum of boolean and array

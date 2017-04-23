@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
-import Leaf from '../components/Leaf'
+import LeafComponent from '../components/Leaf'
+import { updateLeafData } from '../modules/leaflet.js'
 import { leafTypeSelector, leafDataSelector } from './selectors'
-const mapDispatchToProps = {
 
+const mapDispatchToProps = {
+  updateLeafData : (ID, data) => updateLeafData(ID, data)
 }
 
 const mapStateToProps = (state, props) => ({
@@ -10,4 +12,4 @@ const mapStateToProps = (state, props) => ({
   leafData : leafDataSelector(state, props.leafID)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Leaf)
+export default connect(mapStateToProps, mapDispatchToProps)(LeafComponent)

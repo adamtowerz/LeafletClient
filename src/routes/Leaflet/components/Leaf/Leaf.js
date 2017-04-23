@@ -16,25 +16,19 @@ const styles = {
     height: '100%',
     backgroundColor: '#4CAF50'
   },
-  titleCard: {
+  centerCard: {
     height: '100%',
     width: '88%',
     margin: '0 2%',
     display: 'inline-block'
   },
-  titleCardBox: {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-  titleActions: {
+  sideActions: {
     width: '5%',
     height: '100%',
     float: 'right',
     display: 'inline-block'
   },
+  /*
   title: {
     fontWeight: '100',
     fontSize: '1.7em',
@@ -46,7 +40,8 @@ const styles = {
     width: '100%',
     textAlign: 'center'
   },
-  titleAction: {
+  */
+  sideAction: {
     height: '33%',
     width: 'auto',
     padding: 0
@@ -59,13 +54,13 @@ const styles = {
   }
 }
 
-export class Leaf extends React.Component {
+class Leaf extends React.Component {
   constructor (props) {
     super(props)
     console.log('Leaf with props: ' + props)
   }
 
-  fetchContent = (type, data) => {
+  fetchTemplate = (type, data) => {
     const leafStyles = this.fetchStyles(type, data)
     switch (type) {
       case 'title':
@@ -76,7 +71,7 @@ export class Leaf extends React.Component {
         return <div>this is a leaf</div>
     }
   }
-
+  // TODO: move to api
   fetchStyles = (type, data) => {
     switch (type) {
       case 'title':
@@ -102,16 +97,17 @@ export class Leaf extends React.Component {
         return false
     }
   }
-
+  // TODO: move to api
   fetchActions = (type, data) => {
     switch (type) {
       case 'title':
         return [
           {
             iconName: 'bookmark',
-            onClick: function () {},
-            style: {
-              color: '#4CAF50'
+            onClick: { isEmphasized: !data.isEmphasized },
+            styleFunction: (data) => {
+              if (data.isEmphasized) return { color: '#4CAF50' }
+              return
             }
           },
           {
@@ -130,19 +126,19 @@ export class Leaf extends React.Component {
 
   render () {
     // fetch template from ID, apply data
-    return <div id={this.props.leafID} style={{ width: '100%', height: '10em' }}>
+    return <div id={this.props.leafID} style={{ width: '100%', height: '10em', marginBottom: '2em' }}>
       <div style={styles.emphasisBox}>
         {this.props.leafData.isEmphasized ? <Paper style={styles.emphasis} /> : null}
       </div>
-      <Paper style={styles.titleCard} children={
-          this.fetchContent(this.props.leafType, this.props.leafData)
+      <Paper style={styles.centerCard} children={
+          this.fetchTemplate(this.props.leafType, this.props.leafData)
         } />
-      <Paper style={styles.titleActions} children={
+      <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
-          {this.fetchActions(this.props.leafType, this.props.leafData).map((action) =>
-            <IconButton key={action.iconName}
-              style={action.style ? Object.assign(action.style, styles.titleAction) : styles.titleAction}>
-              <i className='material-icons titleActionIcon'>
+          {this.fetchActions(this.props.leafType, this.props.leafData).map((action, i) =>
+            <IconButton key={i} style={{ ...styles.sideAction, ...action.style }}
+              onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
+              <i className='material-icons leaf__sideAction'>
                 {action.iconName}
               </i>
             </IconButton>
@@ -156,7 +152,8 @@ export class Leaf extends React.Component {
 Leaf.propTypes = {
   leafID : PropTypes.string.isRequired,
   leafType : PropTypes.string.isRequired,
-  leafData : PropTypes.object.isRequired
+  leafData : PropTypes.object.isRequired,
+  updateLeafData : PropTypes.func.isRequired
 }
 
 export default Leaf

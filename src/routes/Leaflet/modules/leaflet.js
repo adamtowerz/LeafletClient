@@ -5,8 +5,7 @@ import update from 'react-addons-update'
 // ------------------------------------
 export const NEW_LEAF = 'NEW_LEAF'
 export const SELECT_PAGE = 'SELECT_PAGE'
-export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
-
+export const UPDATE_LEAF_DATA = 'UPDATE_LEAF_DATA'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -28,9 +27,21 @@ export function selectPage (position = false) {
   }
 }
 
+export function updateLeafData (leafID, data = false) {
+  if (leafID && data) {
+    return {
+      type    : UPDATE_LEAF_DATA,
+      id      : leafID,
+      payload : data
+    }
+  } else {
+    console.log('no data, update would change nothing')
+  }
+}
+
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk! */
+    creating async actions, especially when combined with redux-thunk!
 
 export const doubleAsync = () => {
   return (dispatch, getState) => {
@@ -45,18 +56,25 @@ export const doubleAsync = () => {
     })
   }
 }
+*/
 
 export const actions = {
   newLeaf,
   selectPage,
-  doubleAsync
+  updateLeafData
 }
 
+function idGenerator () {
+  var S4 = function () {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+  }
+  return (S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4())
+}
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [NEW_LEAF]             : (state, action) => {
+  [NEW_LEAF]    : (state, action) => {
     const active = state.activePage
     if (active) {
       return update(state, {
@@ -67,7 +85,7 @@ const ACTION_HANDLERS = {
                 leaves: {
                   $push: [{
                     leafType: action.payload,
-                    leafID: '123abc', // TODO: send unqiue IDs
+                    leafID: idGenerator(), // TODO: send unqiue IDs
                     leafData: {}
                   }]
                 }
@@ -81,7 +99,7 @@ const ACTION_HANDLERS = {
       return state
     }
   },
-  [SELECT_PAGE]             : (state, action) => {
+  [SELECT_PAGE] : (state, action) => {
     if (action.payload) {
       return update(state, {
         activePage: {
@@ -92,7 +110,38 @@ const ACTION_HANDLERS = {
       return state
     }
   },
-  [COUNTER_DOUBLE_ASYNC] : (state, action) => state * 2
+  [UPDATE_LEAF_DATA] : (state, action) => {
+    const active = state.activePage
+    let leafLoc = -1
+    let prevData = {}
+    state.sections[active[0]].pages[active[1]].leaves.map((leaf, i) => {
+      if (leaf.leafID === action.id) {
+        leafLoc = i
+        prevData = leaf.leafData
+      }
+    })
+    if (leafLoc === -1) {
+      console.log('could not locate leaf in UPDATE_LEAF_DATA, erroring gracefully')
+      return state
+    }
+    return update(state, {
+      sections: {
+        [active[0]]: {
+          pages: {
+            [active[1]]: {
+              leaves: {
+                [leafLoc] : {
+                  leafData: {
+                    $set: { ...prevData, ...action.payload }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    })
+  }
 }
 
 // ------------------------------------
