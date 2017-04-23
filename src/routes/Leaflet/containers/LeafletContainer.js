@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../modules/leaflet'
+import { newLeaf } from '../modules/leaflet.js'
+import { leavesSelector, activePageSelector } from './selectors'
+// import { increment, doubleAsync } from '../modules/leaflet'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -13,12 +15,13 @@ import Leaflet from '../components/Leaflet'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  increment : () => increment(1),
-  doubleAsync
+  newLeaf : () => newLeaf()
 }
 
 const mapStateToProps = (state) => ({
-  counter : state.counter
+  title         : state.leaflet.title,
+  leaves        : leavesSelector(state),
+  activePage    : activePageSelector(state)
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

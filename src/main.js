@@ -4,6 +4,7 @@ import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import leafletTheme from './theme'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // ========================================================
 // Store Instantiation
@@ -60,4 +61,5 @@ if (__DEV__) {
 // ========================================================
 // Go!
 // ========================================================
+injectTapEventPlugin()
 render()

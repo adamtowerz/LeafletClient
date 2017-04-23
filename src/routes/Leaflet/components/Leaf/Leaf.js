@@ -1,5 +1,4 @@
 import React from 'react'
-import update from 'react-addons-update'
 import PropTypes from 'prop-types'
 import './Leaf.scss'
 import Paper from 'material-ui/Paper'
@@ -63,45 +62,84 @@ const styles = {
 export class Leaf extends React.Component {
   constructor (props) {
     super(props)
-    this.props = props
-    this.state = {
-      leafID: props.leafID,
-      leafData: props.leafData,
-      isEmphasized: props.isEmphasized,
-      actions: props.actions
-    }
+    console.log('Leaf with props: ' + props)
   }
 
-  toggleEmphasis = () => {
-    this.setState((prevState, props) => {
-      return update(this.state.items, { isEmphasized: !prevState.isEmphasized })
-    })
-  }
-
-  fetchContent = (id, data) => {
-    switch (id) {
+  fetchContent = (type, data) => {
+    const leafStyles = this.fetchStyles(type, data)
+    switch (type) {
       case 'title':
-        return <div style={data.styles.titleCardBox}>
-          <span style={data.styles.title}>{data.title}</span>
+        return <div style={leafStyles.titleCardBox}>
+          <span style={leafStyles.title}>{data.title}</span>
         </div>
       default:
         return <div>this is a leaf</div>
+    }
+  }
 
+  fetchStyles = (type, data) => {
+    switch (type) {
+      case 'title':
+        return { titleCardBox: {
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        },
+          title: {
+            fontWeight: '100',
+            fontSize: '1.7em',
+            color: '#4CAF50',
+            display: 'inline-block',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            width: '100%',
+            textAlign: 'center'
+          } }
+      default:
+        return false
+    }
+  }
+
+  fetchActions = (type, data) => {
+    switch (type) {
+      case 'title':
+        return [
+          {
+            iconName: 'bookmark',
+            onClick: function () {},
+            style: {
+              color: '#4CAF50'
+            }
+          },
+          {
+            iconName: 'share',
+            onClick: function () {}
+          },
+          {
+            iconName: 'delete',
+            onClick: function () {}
+          }
+        ]
+      default:
+        return []
     }
   }
 
   render () {
     // fetch template from ID, apply data
-    return <div style={{ width: '100%', height: '12%' }}>
+    return <div id={this.props.leafID} style={{ width: '100%', height: '10em' }}>
       <div style={styles.emphasisBox}>
-        {this.state.isEmphasized ? <Paper style={styles.emphasis} /> : null}
+        {this.props.leafData.isEmphasized ? <Paper style={styles.emphasis} /> : null}
       </div>
       <Paper style={styles.titleCard} children={
-          this.fetchContent(this.state.leafID, this.state.leafData)
+          this.fetchContent(this.props.leafType, this.props.leafData)
         } />
       <Paper style={styles.titleActions} children={
         <div style={styles.iconCol}>
-          {this.state.actions.map((action) =>
+          {this.fetchActions(this.props.leafType, this.props.leafData).map((action) =>
             <IconButton key={action.iconName}
               style={action.style ? Object.assign(action.style, styles.titleAction) : styles.titleAction}>
               <i className='material-icons titleActionIcon'>
@@ -115,25 +153,10 @@ export class Leaf extends React.Component {
   }
 }
 
-/*
-child : REACT object that takes a data object and an ID object
-
-actions : [
-  {
-    class: 'muidocs-icon-action-home',
-    onClick: function()
-    color: '#d8d8d8',
-    toggle: true/false,
-    colorOnToggle: ''
-  },...
-]
-*/
-
 Leaf.propTypes = {
   leafID : PropTypes.string.isRequired,
-  leafData : PropTypes.object.isRequired,
-  actions : PropTypes.array.isRequired,
-  isEmphasized: PropTypes.bool.isRequired
+  leafType : PropTypes.string.isRequired,
+  leafData : PropTypes.object.isRequired
 }
 
 export default Leaf

@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { browserHistory, Router } from 'react-router'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Provider } from 'react-redux'
 
 class AppContainer extends Component {
   static propTypes = {
     routes : PropTypes.object.isRequired,
     store  : PropTypes.object.isRequired
-  }
-
-  componentDidMount () {
-    injectTapEventPlugin()
   }
 
   shouldComponentUpdate () {

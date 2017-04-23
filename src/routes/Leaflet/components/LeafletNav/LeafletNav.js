@@ -26,8 +26,9 @@ export const LeafletNav = (props) => (
     <TextField style={styles.search}
       hintText='Search Leaflet'
     />
-    {props.sections.map((section) =>
-      <LeafletSection key={section.title} title={section.title} pages={section.pages} />
+    {props.sections.map((section, index) =>
+      <LeafletSection key={index} title={section.title}
+        pages={section.pages} position={index} />
     )}
   </div>
 )

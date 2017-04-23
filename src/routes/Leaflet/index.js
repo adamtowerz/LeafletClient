@@ -12,7 +12,7 @@ export default (store) => ({
       const Leaflet = require('./containers/LeafletContainer').default
       const reducer = require('./modules/leaflet').default
 
-      /*  Add the reducer to the store on key 'counter'  */
+      /*  Add the reducer to the store on key 'leaflet'  */
       injectReducer(store, { key: 'leaflet', reducer })
 
       /*  Return getComponent   */
