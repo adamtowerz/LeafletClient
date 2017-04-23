@@ -1,6 +1,7 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Header.scss'
+import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
@@ -14,10 +15,10 @@ const styles = {
   }
 }
 
-export const Header = () => (
+export const Header = (props) => (
   <div>
     <AppBar
-      title={<span style={styles.title}>Leaflet</span>}
+      title={<span style={styles.title}>{props.title}</span>}
       iconElementLeft={<IconButton><NavigationMenu /></IconButton>}
       iconElementRight={
         <IconMenu
@@ -45,5 +46,9 @@ export const Header = () => (
     />
   </div>
 )
+
+Header.propTypes = {
+  title : PropTypes.string.isRequired
+}
 
 export default Header
