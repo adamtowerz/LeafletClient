@@ -6,6 +6,8 @@ import update from 'react-addons-update'
 export const NEW_LEAF = 'NEW_LEAF'
 export const SELECT_PAGE = 'SELECT_PAGE'
 export const UPDATE_LEAF_DATA = 'UPDATE_LEAF_DATA'
+export const TOGGLE_PAGE_FAV = 'TOGGLE_PAGE_FAV'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -20,6 +22,17 @@ export function selectPage (position = false) {
   if (position) {
     return {
       type    : SELECT_PAGE,
+      payload : position
+    }
+  } else {
+    console.log('no position, impossible to selectPage')
+  }
+}
+
+export function togglePageFavorite (position = false) {
+  if (position) {
+    return {
+      type    : TOGGLE_PAGE_FAV,
       payload : position
     }
   } else {
@@ -104,6 +117,26 @@ const ACTION_HANDLERS = {
       return update(state, {
         activePage: {
           $set: action.payload
+        }
+      })
+    } else {
+      return state
+    }
+  },
+  [TOGGLE_PAGE_FAV] : (state, action) => {
+    const position = action.payload
+    if (action.payload) {
+      return update(state, {
+        sections: {
+          [position[0]]: {
+            pages: {
+              [position[1]]: {
+                isFavorited: {
+                  $set: !state.sections[position[0]].pages[position[1]].isFavorited
+                }
+              }
+            }
+          }
         }
       })
     } else {
