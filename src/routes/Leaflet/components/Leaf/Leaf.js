@@ -105,7 +105,8 @@ class Leaf extends React.Component {
           {
             iconName: 'bookmark',
             onClick: { isEmphasized: !data.isEmphasized },
-            styleFunction: (data) => {
+            style: (data) => {
+              console.log('style funciton')
               if (data.isEmphasized) return { color: '#4CAF50' }
               return
             }
@@ -136,7 +137,8 @@ class Leaf extends React.Component {
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
           {this.fetchActions(this.props.leafType, this.props.leafData).map((action, i) =>
-            <IconButton key={i} style={{ ...styles.sideAction, ...action.style }}
+            <IconButton key={i} style={action.style
+              ? { ...styles.sideAction, ...action.style(this.props.leafData) } : styles.sideAction}
               onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
               <i className='material-icons leaf__sideAction'>
                 {action.iconName}
