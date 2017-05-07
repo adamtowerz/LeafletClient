@@ -4,6 +4,7 @@ import update from 'react-addons-update'
 // Constants
 // ------------------------------------
 export const NEW_LEAF = 'NEW_LEAF'
+export const DELETE_LEAF = 'DELETE_LEAF'
 export const SELECT_PAGE = 'SELECT_PAGE'
 export const UPDATE_LEAF_DATA = 'UPDATE_LEAF_DATA'
 export const TOGGLE_PAGE_FAV = 'TOGGLE_PAGE_FAV'
@@ -42,10 +43,19 @@ export function togglePageFavorite (position = false) {
 
 export function updateLeafData (leafID, data = false) {
   if (leafID && data) {
-    return {
-      type    : UPDATE_LEAF_DATA,
-      id      : leafID,
-      payload : data
+    if (data.delete) { // if data has a true delete flag, delete the leaf
+      console.log('delete da leaf ' + leafID)
+      return {
+        type    : DELETE_LEAF,
+        id      : leafID
+      }
+    } else { // otherwise update data as normal
+      console.log('update da leaf ' + leafID)
+      return {
+        type    : UPDATE_LEAF_DATA,
+        id      : leafID,
+        payload : data
+      }
     }
   } else {
     console.log('no data, update would change nothing')
@@ -83,11 +93,12 @@ function idGenerator () {
   }
   return (S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4())
 }
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [NEW_LEAF]    : (state, action) => {
+  [NEW_LEAF]         : (state, action) => {
     const active = state.activePage
     if (active) {
       return update(state, {
@@ -112,7 +123,34 @@ const ACTION_HANDLERS = {
       return state
     }
   },
-  [SELECT_PAGE] : (state, action) => {
+  [DELETE_LEAF]      : (state, action) => {
+    const active = state.activePage
+    let leafIndex
+    state.sections[active[0]].pages[active[1]].leaves.map((leaf, i) => {
+      if (leaf.leafID === action.id) {
+        leafIndex = i
+      }
+    })
+    if (active) {
+      return update(state, {
+        sections: {
+          [active[0]]: {
+            pages: {
+              [active[1]]: {
+                leaves: {
+                  $splice: [[leafIndex, 1]]
+                }
+              }
+            }
+          }
+        }
+      })
+    } else {
+      console.log('no activePage, impossible to add leaf')
+      return state
+    }
+  },
+  [SELECT_PAGE]      : (state, action) => {
     if (action.payload) {
       return update(state, {
         activePage: {
@@ -123,7 +161,7 @@ const ACTION_HANDLERS = {
       return state
     }
   },
-  [TOGGLE_PAGE_FAV] : (state, action) => {
+  [TOGGLE_PAGE_FAV]  : (state, action) => {
     const position = action.payload
     if (action.payload) {
       return update(state, {

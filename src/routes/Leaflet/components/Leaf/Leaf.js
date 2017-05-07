@@ -117,7 +117,7 @@ class Leaf extends React.Component {
           },
           {
             iconName: 'delete',
-            onClick: function () {}
+            onClick: { delete: true }
           }
         ]
       default:
