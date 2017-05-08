@@ -15,7 +15,7 @@ import Leaflet from '../components/Leaflet'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  newLeaf : () => newLeaf()
+  newLeaf : (type) => newLeaf(type)
 }
 
 const mapStateToProps = (state) => ({

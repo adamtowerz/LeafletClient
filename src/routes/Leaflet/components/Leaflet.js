@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import '../../../styles/core.scss'
 import _greedy from '../../../styles/greedy.js'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 import LeafletNav from '../containers/LeafletNavContainer.js'
 import Leaf from '../containers/LeafContainer.js'
 
@@ -31,24 +33,64 @@ const styles = {
   }
 }
 
-export const Leaflet = (props) => {
-  return (
-    <div style={_greedy}>
-      <span style={styles.navCol}>
-        <LeafletNav />
-      </span>
-      <span style={styles.contentCol}>
-        {(props.leaves.length > 0) ? props.leaves.map((leaf, i) => (
-          <Leaf key={i} leafID={leaf.leafID} />
-        )) : null}
-      </span>
-      <span style={styles.dockCol} />
-      {typeof props.activePage === 'object'
-        ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={props.newLeaf}>
-          <i className='material-icons titleActionIcon'>add</i>
-        </FloatingActionButton> : null}
-    </div>
-  )
+export default class Leaflet extends React.Component {
+  state = {
+    open: false
+  }
+
+  handleOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
+  render () {
+    const actions = [
+      <FlatButton
+        label='Cancel'
+        primary
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label='Title'
+        primary
+        onTouchTap={() => this.props.newLeaf()}
+      />,
+      <FlatButton
+        label='Imgur'
+        primary
+        onTouchTap={() => this.props.newLeaf('imgur')}
+      />
+    ]
+
+    return (
+      <div style={_greedy}>
+        <span style={styles.navCol}>
+          <LeafletNav />
+        </span>
+        <span style={styles.contentCol}>
+          {(this.props.leaves.length > 0) ? this.props.leaves.map((leaf, i) => (
+            <Leaf key={i} leafID={leaf.leafID} />
+          )) : null}
+        </span>
+        <span style={styles.dockCol} />
+        {typeof this.props.activePage === 'object'
+          ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpen}>
+            <i className='material-icons titleActionIcon'>add</i>
+          </FloatingActionButton> : null}
+        <Dialog
+          title='New Leaf'
+          actions={actions}
+          modal
+          open={this.state.open}
+          >
+            Create new Leaves Dialog
+          </Dialog>
+      </div>
+    )
+  }
 }
 
 Leaflet.propTypes = {
@@ -56,5 +98,3 @@ Leaflet.propTypes = {
   newLeaf    : PropTypes.func.isRequired,
   activePage : PropTypes.any.isRequired // TODO: 'any' -> enum of boolean and array
 }
-
-export default Leaflet
