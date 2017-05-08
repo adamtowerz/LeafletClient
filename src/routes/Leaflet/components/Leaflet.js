@@ -54,14 +54,14 @@ export default class Leaflet extends React.Component {
         onTouchTap={this.handleClose}
       />,
       <FlatButton
-        label='Title'
+        label='title'
         primary
-        onTouchTap={() => this.props.newLeaf()}
+        onTouchTap={() => this.props.newLeaf('title')}
       />,
       <FlatButton
-        label='Imgur'
+        label='rawText'
         primary
-        onTouchTap={() => this.props.newLeaf('imgur')}
+        onTouchTap={() => this.props.newLeaf('rawText')}
       />
     ]
 
@@ -85,6 +85,7 @@ export default class Leaflet extends React.Component {
           actions={actions}
           modal
           open={this.state.open}
+          onRequestClose={this.handleClose}
           >
             Create new Leaves Dialog
           </Dialog>
