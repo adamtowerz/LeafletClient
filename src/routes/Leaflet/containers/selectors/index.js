@@ -8,18 +8,24 @@ export const pageSelector = createSelector(activePageSelector, sectionsSelector,
 
 export const leavesSelector = createSelector(pageSelector, (page) => page ? page.leaves : [])
 
-export const leafSelector = createSelector(leavesSelector, (_, props) => props,
-  (leaves, props) => {
-    return leaves.map((leaf) => {
-      if (leaf.leafID === props) {
-        return leaf
+export const leafID = (_, props) => props
+
+export const leafSelector = createSelector(leavesSelector, leafID,
+  (leaves, ID) => {
+    let ret
+    leaves.map((leaf) => {
+      if (leaf.leafID === ID) {
+        console.log('reutrning:')
+        console.log(leaf)
+        ret = leaf
       }
     })
+    return ret
   })
 
 export const leafTypeSelector = createSelector(leafSelector, (leaf) => {
-  return leaf[0].leafType
+  return leaf.leafType
 })
 export const leafDataSelector = createSelector(leafSelector, (leaf) => {
-  return leaf[0].leafData
+  return leaf.leafData
 })
