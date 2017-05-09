@@ -57,24 +57,36 @@ export let fetchActions = (type, data) => {
   switch (type) {
     case 'title':
     default:
-      return [
-        {
-          iconName: 'bookmark',
-          onClick: { isEmphasized: !data.isEmphasized },
-          style: (data) => {
-            console.log('style funciton')
-            if (data.isEmphasized) return { color: '#4CAF50' }
-            return
+      return {
+        bar: [
+          {
+            iconName: 'bookmark',
+            onClick: { isEmphasized: !data.isEmphasized },
+            style: (data) => {
+              console.log('style funciton')
+              if (data.isEmphasized) return { color: '#4CAF50' }
+              return
+            }
+          },
+          {
+            iconName: 'share',
+            onClick: function () {}
+          },
+          {
+            iconName: 'delete',
+            onClick: { delete: true }
           }
-        },
-        {
-          iconName: 'share',
-          onClick: function () {}
-        },
-        {
-          iconName: 'delete',
-          onClick: { delete: true }
-        }
-      ]
+        ],
+        trough: [
+          {
+            iconName: 'transform',
+            onClick: function () {}
+          },
+          {
+            iconName: 'place',
+            onClick: { }
+          }
+        ]
+      }
   }
 }

@@ -6,11 +6,27 @@ import IconButton from 'material-ui/IconButton'
 import { fetchTemplate, fetchActions } from './fetch.js'
 
 const styles = {
-  centerCard: {
+  centerArea: {
     height: '100%',
     width: '91%',
     margin: '0 2%',
     display: 'inline-block'
+  },
+  centerCard: {
+    height: '100%',
+    width: '100%',
+    display: 'block'
+  },
+  trough: {
+    height: '100%',
+    width: '100%',
+    display: 'block',
+    zIndex: '-1',
+    backgroundColor: '#424242',
+    top: '-3px',
+    borderRadius: '0px',
+    borderBottomRightRadius: '2px',
+    borderBottomLeftRadius: '2px'
   },
   centerCardEmphasized: {
     borderLeft:'6px solid #4caf50'
@@ -31,28 +47,50 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-around',
     flexDirection: 'column'
+  },
+  bottomAction: {
+
+  },
+  iconRow: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row'
   }
 }
 
 class Leaf extends React.Component {
-  constructor (props) {
+  /* constructor (props) {
     super(props)
-    console.log('Leaf with props: ' + props)
-  }
+  } */
 
   render () {
-    console.log('leaf props')
-    console.log(this.props)
+    var actions = fetchActions(this.props.leafType, this.props.leafData)
+
     // fetch template from ID, apply data
     return <div id={this.props.leafID} style={{ width: '100%', minHeight: '5em', marginBottom: '1em' }}>
-      <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
-        : { ...styles.centerCard, ...styles.centerCardEmphasized }}
-        children={
-          fetchTemplate(this.props.leafType, this.props.leafData)
+      <div style={styles.centerArea}>
+        <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
+          : { ...styles.centerCard, ...styles.centerCardEmphasized }}
+          children={fetchTemplate(this.props.leafType, this.props.leafData)}
+        />
+        <Paper style={styles.trough} children={
+          <div style={styles.iconRow}>
+            {actions.trough.map((action, i) =>
+              <IconButton key={i} style={action.style
+                ? { ...styles.sideAction, ...action.style(this.props.leafData) } : styles.bottomAction}
+                onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
+                <i className='material-icons leaf__sideAction'>
+                  {action.iconName}
+                </i>
+              </IconButton>
+            )}
+          </div>
         } />
+      </div>
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
-          {fetchActions(this.props.leafType, this.props.leafData).map((action, i) =>
+          {actions.bar.map((action, i) =>
             <IconButton key={i} style={action.style
               ? { ...styles.sideAction, ...action.style(this.props.leafData) } : styles.sideAction}
               onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
