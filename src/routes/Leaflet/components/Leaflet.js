@@ -2,9 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../../../styles/core.scss'
 import _greedy from '../../../styles/greedy.js'
+
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+
+import DraggableList from 'react-draggable-list'
+
 import LeafletNav from '../containers/LeafletNavContainer.js'
 import Leaf from '../containers/LeafContainer.js'
 
@@ -46,6 +50,14 @@ export default class Leaflet extends React.Component {
     this.setState({ open: false })
   }
 
+  _toggleContainer () {
+    this.setState({ useContainer: !this.state.useContainer })
+  }
+
+  _onListChange (newList) {
+    this.setState({ list: newList })
+  }
+
   render () {
     const actions = [
       <FlatButton
@@ -64,17 +76,24 @@ export default class Leaflet extends React.Component {
         onTouchTap={() => this.props.newLeaf('rawText')}
       />
     ]
-
+    /* {(this.props.leaves.length > 0) ? this.props.leaves.map((leaf, i) => (
+      <Leaf key={i} leafID={leaf.leafID} />
+    )) : null} */
     return (
       <div style={_greedy}>
         <span style={styles.navCol}>
           <LeafletNav />
         </span>
         <span style={styles.contentCol}>
-          {(this.props.leaves.length > 0) ? this.props.leaves.map((leaf, i) => (
-            <Leaf key={i} leafID={leaf.leafID} />
-          )) : null}
+          <DraggableList
+            itemKey='leafID'
+            template={Leaf}
+            list={this.props.leaves}
+            onMoveEnd={newList => this._onListChange(newList)}
+            container={() => document.body}
+            />
         </span>
+
         <span style={styles.dockCol} />
         {typeof this.props.activePage === 'object'
           ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpen}>
@@ -83,7 +102,7 @@ export default class Leaflet extends React.Component {
         <Dialog
           title='New Leaf'
           actions={actions}
-          modal
+          modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
           >

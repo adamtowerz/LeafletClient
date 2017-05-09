@@ -41,6 +41,8 @@ class Leaf extends React.Component {
   }
 
   render () {
+    console.log('leaf props')
+    console.log(this.props)
     // fetch template from ID, apply data
     return <div id={this.props.leafID} style={{ width: '100%', minHeight: '5em', marginBottom: '1em' }}>
       <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard

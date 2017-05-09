@@ -106,6 +106,7 @@
     "react-addons-update": "^15.5.2",
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.0.0",
+    "react-draggable-list": "^3.3.0",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
     "react-tap-event-plugin": "^2.0.1",
