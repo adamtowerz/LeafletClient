@@ -12,7 +12,7 @@ export let fetchTemplate = (type, data) => {
       return <TextField
         hintText='Go Type!'
         multiLine
-        rows={3}
+        rows={5}
         style={leafStyles.textFieldStyles}
       />
     default:
