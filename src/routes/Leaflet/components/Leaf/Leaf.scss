@@ -1,9 +1,27 @@
 // general leaf styling
 
-.leaf__sideAction {
+.leaf__action {
   opacity: 0.56;
 }
 
-.leaf__sideAction:hover {
+.leaf__action:hover {
   opacity: 1;
+}
+
+.trough-enter {
+  opacity: 0.01;
+}
+
+.trough-enter.trough-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.trough-leave {
+  opacity: 1;
+}
+
+.trough-leave.trough-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

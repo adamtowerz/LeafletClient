@@ -79,7 +79,7 @@ export let fetchActions = (type, data) => {
         ],
         trough: [
           {
-            iconName: 'transform',
+            iconName: 'gesture',
             onClick: function () {}
           },
           {

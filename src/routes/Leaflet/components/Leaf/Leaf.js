@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-transition-group'
 import PropTypes from 'prop-types'
 import './Leaf.scss'
 import Paper from 'material-ui/Paper'
@@ -18,7 +19,7 @@ const styles = {
     display: 'block'
   },
   trough: {
-    height: '100%',
+    height: '50px',
     width: '100%',
     display: 'block',
     zIndex: '-1',
@@ -53,9 +54,13 @@ const styles = {
   },
   iconRow: {
     height: '100%',
-    width: '100%',
+    width: '80%',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    float: 'left'
+  },
+  dragHandle: {
+    float: 'right'
   }
 }
 
@@ -66,6 +71,7 @@ class Leaf extends React.Component {
 
   render () {
     var actions = fetchActions(this.props.leafType, this.props.leafData)
+    const dragHandle = this.props.dragHandle
 
     // fetch template from ID, apply data
     return <div id={this.props.leafID} style={{ width: '100%', minHeight: '5em', marginBottom: '1em' }}>
@@ -74,19 +80,27 @@ class Leaf extends React.Component {
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
           children={fetchTemplate(this.props.leafType, this.props.leafData)}
         />
-        <Paper style={styles.trough} children={
-          <div style={styles.iconRow}>
+
+        <Paper style={styles.trough} children={[
+          <div key='left' style={styles.iconRow}>
             {actions.trough.map((action, i) =>
               <IconButton key={i} style={action.style
-                ? { ...styles.sideAction, ...action.style(this.props.leafData) } : styles.bottomAction}
+                ? { ...styles.bottomAction, ...action.style(this.props.leafData) } : styles.bottomAction}
                 onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
-                <i className='material-icons leaf__sideAction'>
+                <i className='material-icons leaf__action'>
                   {action.iconName}
                 </i>
               </IconButton>
             )}
+          </div>,
+          <div key='right'>
+            {dragHandle(<IconButton style={styles.dragHandle}>
+              <i className='material-icons leaf__action'>
+                transform
+              </i>
+            </IconButton>)}
           </div>
-        } />
+        ]} />
       </div>
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
@@ -94,7 +108,7 @@ class Leaf extends React.Component {
             <IconButton key={i} style={action.style
               ? { ...styles.sideAction, ...action.style(this.props.leafData) } : styles.sideAction}
               onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
-              <i className='material-icons leaf__sideAction'>
+              <i className='material-icons leaf__action'>
                 {action.iconName}
               </i>
             </IconButton>
@@ -109,7 +123,8 @@ Leaf.propTypes = {
   leafID : PropTypes.string.isRequired,
   leafType : PropTypes.string.isRequired,
   leafData : PropTypes.object.isRequired,
-  updateLeafData : PropTypes.func.isRequired
+  updateLeafData : PropTypes.func.isRequired,
+  dragHandle : PropTypes.func
 }
 
 export default Leaf
