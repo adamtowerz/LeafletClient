@@ -13,13 +13,13 @@ const styles = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    maxWidth: '65%',
+    maxWidth: '85%',
     display: 'inline-block'
   },
   ul: {
     listStyle: 'none',
     width: '100%',
-    paddingLeft: '0'
+    paddingLeft: '1.5em'
   },
   chevron: {
     padding: 0,
