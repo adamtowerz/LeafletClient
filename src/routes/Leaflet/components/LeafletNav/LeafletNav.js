@@ -18,11 +18,14 @@ props: {
 const styles = {
   search: {
     width: '80%'
+  },
+  div: {
+    paddingLeft: '0.5em'
   }
 }
 
 export const LeafletNav = (props) => (
-  <div>
+  <div style={styles.div}>
     <TextField style={styles.search}
       hintText='Search Leaflet'
     />
