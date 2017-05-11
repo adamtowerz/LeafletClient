@@ -7,6 +7,7 @@ debug('Creating configuration.')
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
   files    : [
+    './node_modules/babel-polyfill/dist/polyfill.js',
     {
       pattern  : `./${project.dir_test}/test-bundler.js`,
       watched  : false,
