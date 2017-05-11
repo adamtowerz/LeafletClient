@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-transition-group'
+// import { CSSTransitionGroup } from 'react-transition-group'
 import PropTypes from 'prop-types'
+// import FirstChild from '../../../../components/FirstChild'
 import './Leaf.scss'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'
@@ -16,18 +17,27 @@ const styles = {
   centerCard: {
     height: '100%',
     width: '100%',
-    display: 'block'
+    display: 'block',
+    zIndex: '2',
+    position: 'relative'
   },
   trough: {
+    position: 'relative',
     height: '50px',
     width: '100%',
     display: 'block',
-    zIndex: '-1',
+    zIndex: '1',
     backgroundColor: '#424242',
-    top: '-3px',
+    top: '0px',
     borderRadius: '0px',
     borderBottomRightRadius: '2px',
-    borderBottomLeftRadius: '2px'
+    borderBottomLeftRadius: '2px',
+    transitionProperty: 'top',
+    transitionDuration: '.5s',
+    transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
+  },
+  troughHidden: {
+    top: '-50px'
   },
   centerCardEmphasized: {
     borderLeft:'6px solid #4caf50'
@@ -52,12 +62,16 @@ const styles = {
   bottomAction: {
 
   },
-  iconRow: {
+  troughLeft: {
+    position: 'relative',
     height: '100%',
     width: '80%',
     display: 'flex',
     flexDirection: 'row',
     float: 'left'
+  },
+  troughRight: {
+    position: 'relative'
   },
   dragHandle: {
     float: 'right'
@@ -72,7 +86,6 @@ class Leaf extends React.Component {
   render () {
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
-
     // fetch template from ID, apply data
     return <div id={this.props.leafID} style={{ width: '100%', minHeight: '5em', marginBottom: '1em' }}>
       <div style={styles.centerArea}>
@@ -80,27 +93,28 @@ class Leaf extends React.Component {
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
           children={fetchTemplate(this.props.leafType, this.props.leafData)}
         />
-
-        <Paper style={styles.trough} children={[
-          <div key='left' style={styles.iconRow}>
-            {actions.trough.map((action, i) =>
-              <IconButton key={i} style={action.style
-                ? { ...styles.bottomAction, ...action.style(this.props.leafData) } : styles.bottomAction}
-                onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
+        <Paper style={!this.props.leafData.showTrough
+          ? { ...styles.trough, ...styles.troughHidden } : styles.trough}
+          key='trough' children={[
+            <div key='left' style={styles.troughLeft}>
+              {actions.trough.map((action, i) =>
+                <IconButton key={i} style={action.style
+                  ? { ...styles.bottomAction, ...action.style(this.props.leafData) } : styles.bottomAction}
+                  onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
+                  <i className='material-icons leaf__action'>
+                    {action.iconName}
+                  </i>
+                </IconButton>
+              )}
+            </div>,
+            <div key='right' style={styles.troughRight}>
+              {dragHandle(<IconButton style={styles.dragHandle}>
                 <i className='material-icons leaf__action'>
-                  {action.iconName}
+                  transform
                 </i>
-              </IconButton>
-            )}
-          </div>,
-          <div key='right'>
-            {dragHandle(<IconButton style={styles.dragHandle}>
-              <i className='material-icons leaf__action'>
-                transform
-              </i>
-            </IconButton>)}
-          </div>
-        ]} />
+              </IconButton>)}
+            </div>
+          ]} />
       </div>
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>

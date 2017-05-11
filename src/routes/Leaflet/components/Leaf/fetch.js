@@ -63,7 +63,6 @@ export let fetchActions = (type, data) => {
             iconName: 'bookmark',
             onClick: { isEmphasized: !data.isEmphasized },
             style: (data) => {
-              console.log('style funciton')
               if (data.isEmphasized) return { color: '#4CAF50' }
               return
             }
@@ -73,14 +72,14 @@ export let fetchActions = (type, data) => {
             onClick: function () {}
           },
           {
-            iconName: 'delete',
-            onClick: { delete: true }
+            iconName: 'more_vert',
+            onClick: { showTrough: !data.showTrough }
           }
         ],
         trough: [
           {
-            iconName: 'gesture',
-            onClick: function () {}
+            iconName: 'delete',
+            onClick: { delete: true }
           },
           {
             iconName: 'place',
