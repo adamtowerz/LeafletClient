@@ -12,12 +12,16 @@ import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz'
 const styles = {
   title: {
     cursor: 'pointer'
+  },
+  appbar: {
+    position: 'fixed'
   }
 }
 
 export const Header = (props) => (
   <div>
     <AppBar
+      style={styles.appbar}
       title={<span style={styles.title}>{props.title}</span>}
       iconElementLeft={<IconButton><NavigationMenu /></IconButton>}
       iconElementRight={

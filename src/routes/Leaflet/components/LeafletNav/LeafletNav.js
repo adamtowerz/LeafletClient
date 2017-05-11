@@ -20,7 +20,8 @@ const styles = {
     width: '80%'
   },
   div: {
-    paddingLeft: '0.5em'
+    paddingLeft: '0.5em',
+    position: 'fixed'
   }
 }
 
