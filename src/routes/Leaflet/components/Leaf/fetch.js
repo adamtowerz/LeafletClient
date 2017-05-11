@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
 
-export let fetchTemplate = (type, data) => {
+export let fetchTemplate = (type, data, update) => {
   const leafStyles = fetchStyles(type, data)
   switch (type) {
     case 'title':
@@ -10,10 +10,14 @@ export let fetchTemplate = (type, data) => {
       </div>
     case 'rawText':
       return <TextField
+        value={data.value}
         hintText='Go Type!'
         multiLine
         rows={5}
         style={leafStyles.textFieldStyles}
+        onChange={(e, nv) => {
+          update({ value: nv })
+        }}
       />
     default:
       return <div>this is a leaf</div>

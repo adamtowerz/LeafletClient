@@ -79,9 +79,10 @@ const styles = {
 }
 
 class Leaf extends React.Component {
-  /* constructor (props) {
+  constructor (props) {
     super(props)
-  } */
+    this.update = (data) => this.props.updateLeafData(this.props.leafID, data)
+  }
 
   render () {
     var actions = fetchActions(this.props.leafType, this.props.leafData)
@@ -91,7 +92,7 @@ class Leaf extends React.Component {
       <div style={styles.centerArea}>
         <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
-          children={fetchTemplate(this.props.leafType, this.props.leafData)}
+          children={fetchTemplate(this.props.leafType, this.props.leafData, this.update)}
         />
         <Paper style={!this.props.leafData.showTrough
           ? { ...styles.trough, ...styles.troughHidden } : styles.trough}

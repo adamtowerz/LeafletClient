@@ -15,8 +15,6 @@ export const leafSelector = createSelector(leavesSelector, leafID,
     let ret
     leaves.map((leaf) => {
       if (leaf.leafID === ID) {
-        console.log('reutrning:')
-        console.log(leaf)
         ret = leaf
       }
     })
