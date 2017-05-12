@@ -85,7 +85,16 @@ class Leaf extends React.Component {
     this.update = (data) => this.props.updateLeafData(this.props.leafID, data)
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.props.leafID !== nextProps.leafID) return true
+    if (this.props.leafData !== nextProps.leafData) return true
+    if (this.props.dragHandle !== nextProps.dragHandle) return true
+
+    return false
+  }
+
   render () {
+    console.log('render leaf')
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
     // fetch template from ID, apply data

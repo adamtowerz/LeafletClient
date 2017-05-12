@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { newLeaf } from '../modules/leaflet.js'
+import { newLeaf, sortLeavesList } from '../modules/leaflet.js'
 import { leavesSelector, activePageSelector } from './selectors'
 // import { increment, doubleAsync } from '../modules/leaflet'
 
@@ -15,7 +15,8 @@ import Leaflet from '../components/Leaflet'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  newLeaf : (type) => newLeaf(type)
+  newLeaf : (type) => newLeaf(type),
+  sortLeavesList : (list) => sortLeavesList(list)
 }
 
 const mapStateToProps = (state) => ({

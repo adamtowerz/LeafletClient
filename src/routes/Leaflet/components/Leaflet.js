@@ -50,14 +50,6 @@ export default class Leaflet extends React.Component {
     this.setState({ open: false })
   }
 
-  _toggleContainer () {
-    this.setState({ useContainer: !this.state.useContainer })
-  }
-
-  _onListChange (newList) {
-    this.setState({ list: newList })
-  }
-
   render () {
     const actions = [
       <FlatButton
@@ -89,8 +81,9 @@ export default class Leaflet extends React.Component {
             itemKey='leafID'
             template={Leaf}
             list={this.props.leaves}
-            onMoveEnd={newList => this._onListChange(newList)}
-            container={() => document.body}
+            onMoveEnd={(list, item, oldIndex, newIndex) => {
+              this.props.sortLeavesList(list)
+            }}
             />
         </span>
 
@@ -116,5 +109,6 @@ export default class Leaflet extends React.Component {
 Leaflet.propTypes = {
   leaves     : PropTypes.array.isRequired,
   newLeaf    : PropTypes.func.isRequired,
+  sortLeavesList : PropTypes.func.isRequired,
   activePage : PropTypes.any.isRequired // TODO: 'any' -> enum of boolean and array
 }

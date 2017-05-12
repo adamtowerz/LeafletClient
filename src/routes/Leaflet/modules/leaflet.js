@@ -4,9 +4,12 @@ import update from 'react-addons-update'
 // Constants
 // ------------------------------------
 export const NEW_LEAF = 'NEW_LEAF'
+export const SORT_LEAVES_LIST = 'SORT_LEAVES_LIST'
+
 export const DELETE_LEAF = 'DELETE_LEAF'
-export const SELECT_PAGE = 'SELECT_PAGE'
 export const UPDATE_LEAF_DATA = 'UPDATE_LEAF_DATA'
+
+export const SELECT_PAGE = 'SELECT_PAGE'
 export const TOGGLE_PAGE_FAV = 'TOGGLE_PAGE_FAV'
 
 // ------------------------------------
@@ -16,6 +19,15 @@ export function newLeaf (leafType = 'title') {
   return {
     type    : NEW_LEAF,
     payload : leafType
+  }
+}
+
+export function sortLeavesList (list) {
+  return {
+    type    : SORT_LEAVES_LIST,
+    payload : {
+      list: list
+    }
   }
 }
 
@@ -44,13 +56,11 @@ export function togglePageFavorite (position = false) {
 export function updateLeafData (leafID, data = false) {
   if (leafID && data) {
     if (data.delete) { // if data has a true delete flag, delete the leaf
-      console.log('delete da leaf ' + leafID)
       return {
         type    : DELETE_LEAF,
         id      : leafID
       }
     } else { // otherwise update data as normal
-      console.log('update da leaf ' + leafID)
       return {
         type    : UPDATE_LEAF_DATA,
         id      : leafID,
@@ -83,6 +93,7 @@ export const doubleAsync = () => {
 
 export const actions = {
   newLeaf,
+  sortLeavesList,
   selectPage,
   updateLeafData
 }
@@ -120,6 +131,28 @@ const ACTION_HANDLERS = {
       })
     } else {
       console.log('no activePage, impossible to add leaf')
+      return state
+    }
+  },
+  [SORT_LEAVES_LIST] : (state, action) => {
+    console.log(action)
+    const active = state.activePage
+    if (active) {
+      return update(state, {
+        sections: {
+          [active[0]]: {
+            pages: {
+              [active[1]]: {
+                leaves: {
+                  $set: action.payload.list
+                }
+              }
+            }
+          }
+        }
+      })
+    } else {
+      console.log('no activePage, impossible to sort leaves')
       return state
     }
   },
