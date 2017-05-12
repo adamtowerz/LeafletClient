@@ -19,7 +19,8 @@ const styles = {
     width: '100%',
     display: 'block',
     zIndex: '2',
-    position: 'relative'
+    position: 'relative',
+    borderLeft: ''
   },
   trough: {
     position: 'relative',

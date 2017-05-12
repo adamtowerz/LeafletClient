@@ -18,7 +18,9 @@ export class LeafletPage extends React.Component {
         ? 'leafletPageTitleSelected' : 'leafletPageTitle'}>
         <IconFavorite className={this.props.isFavorited ? 'leafletPageFav' : 'leafletPageFavFiller'}
           onTouchTap={() => this.props.togglePageFavorite(this.props.position)} />
-        <span onTouchTap={() => this.props.selectPage(this.props.position)}>{this.props.title}</span>
+        <span onTouchTap={() => {
+          if (!this.props.position === this.props.activePage) this.props.selectPage(this.props.position)
+        }}>{this.props.title}</span>
       </div>
     )
   }
