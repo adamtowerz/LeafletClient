@@ -3,14 +3,25 @@ import PropTypes from 'prop-types'
 import './LeafletNav.scss'
 import IconFavorite from 'material-ui/svg-icons/action/favorite'
 
-export const LeafletPage = (props) => {
-  return (
-    <div className={(props.position === props.activePage) ? 'leafletPageTitleSelected' : 'leafletPageTitle'}>
-      <IconFavorite className={props.isFavorited ? 'leafletPageFav' : 'leafletPageFavFiller'}
-        onTouchTap={() => props.togglePageFavorite(props.position)} />
-      <span onTouchTap={() => props.selectPage(props.position)}>{props.title}</span>
-    </div>
-  )
+export class LeafletPage extends React.Component {
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.props.title !== nextProps.title) return true
+    if (this.props.isFavorited !== nextProps.isFavorited) return true
+    if (this.props.activePage !== nextProps.activePage) return true
+    return false
+  }
+
+  render () {
+    console.log('rendering page')
+    return (
+      <div className={(this.props.position === this.props.activePage)
+        ? 'leafletPageTitleSelected' : 'leafletPageTitle'}>
+        <IconFavorite className={this.props.isFavorited ? 'leafletPageFav' : 'leafletPageFavFiller'}
+          onTouchTap={() => this.props.togglePageFavorite(this.props.position)} />
+        <span onTouchTap={() => this.props.selectPage(this.props.position)}>{this.props.title}</span>
+      </div>
+    )
+  }
 }
 
 LeafletPage.propTypes = {
