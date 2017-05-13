@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './LeafletNav.scss'
+import { arrayCompare } from '../../../../helpers'
 import IconFavorite from 'material-ui/svg-icons/action/favorite'
 
 export class LeafletPage extends React.Component {
@@ -13,13 +14,17 @@ export class LeafletPage extends React.Component {
 
   render () {
     console.log('rendering page')
+    console.log(this.props.position)
+    console.log(this.props.activePage)
+    let className = arrayCompare(this.props.position, this.props.activePage)
+      ? 'leafletPageTitleSelected' : 'leafletPageTitle'
+    console.log(className)
     return (
-      <div className={(this.props.position === this.props.activePage)
-        ? 'leafletPageTitleSelected' : 'leafletPageTitle'}>
+      <div className={className}>
         <IconFavorite className={this.props.isFavorited ? 'leafletPageFav' : 'leafletPageFavFiller'}
           onTouchTap={() => this.props.togglePageFavorite(this.props.position)} />
         <span onTouchTap={() => {
-          if (!this.props.position === this.props.activePage) this.props.selectPage(this.props.position)
+          if (this.props.position !== this.props.activePage) this.props.selectPage(this.props.position)
         }}>{this.props.title}</span>
       </div>
     )
