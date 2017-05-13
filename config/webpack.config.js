@@ -2,6 +2,7 @@ const argv = require('yargs').argv
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleTrackerPlugin = require('webpack-bundle-tracker')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
 const debug = require('debug')('app:config:webpack')
@@ -64,7 +65,8 @@ webpackConfig.plugins = [
     minify   : {
       collapseWhitespace : true
     }
-  })
+  }),
+  new BundleTrackerPlugin({ filename: 'dist/webpack-stats.json' })
 ]
 
 // Ensure that the compiler exits on errors during testing so that
