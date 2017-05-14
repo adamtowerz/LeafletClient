@@ -13,7 +13,6 @@ const styles = {
     marginBottom: '1em'
   },
   newPageTextField: {
-    // paddingLeft: 'calc(1.5em + 14px)',
     width: '60%'
   },
   newPageActionIcons: {
@@ -31,6 +30,7 @@ export class NewLeafletPage extends React.Component {
       errorText: ''
     }
   }
+
   componentDidMount () {
     this.newPageInput.focus()
   }
@@ -43,13 +43,11 @@ export class NewLeafletPage extends React.Component {
         this.setState((prevState) => ({
           errorText: 'Cannot exceed 32 characters!'
         }))
-        this.errorText = 'Cannot exceed 32 characters!'
       }
     } else {
       this.setState((prevState) => ({
         errorText: 'Cannot be empty!'
       }))
-      this.errorText = 'Cannot be empty!'
     }
   }
 

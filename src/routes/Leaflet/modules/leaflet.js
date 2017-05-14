@@ -12,6 +12,8 @@ export const NEW_PAGE = 'NEW_PAGE'
 export const SELECT_PAGE = 'SELECT_PAGE'
 export const TOGGLE_PAGE_FAV = 'TOGGLE_PAGE_FAV'
 
+export const NEW_SECTION = 'NEW_SECTION'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -28,6 +30,25 @@ export function sortLeavesList (list) {
     payload : {
       list: list
     }
+  }
+}
+
+export function updateLeafData (leafID, data = false) {
+  if (leafID && data) {
+    if (data.delete) { // if data has a true delete flag, delete the leaf
+      return {
+        type    : DELETE_LEAF,
+        id      : leafID
+      }
+    } else { // otherwise update data as normal
+      return {
+        type    : UPDATE_LEAF_DATA,
+        id      : leafID,
+        payload : data
+      }
+    }
+  } else {
+    console.log('no data, update would change nothing')
   }
 }
 
@@ -65,50 +86,20 @@ export function newPage (title, sectionPosition = false) {
   }
 }
 
-export function updateLeafData (leafID, data = false) {
-  if (leafID && data) {
-    if (data.delete) { // if data has a true delete flag, delete the leaf
-      return {
-        type    : DELETE_LEAF,
-        id      : leafID
-      }
-    } else { // otherwise update data as normal
-      return {
-        type    : UPDATE_LEAF_DATA,
-        id      : leafID,
-        payload : data
-      }
-    }
-  } else {
-    console.log('no data, update would change nothing')
+export function newSection (title) {
+  return {
+    type: NEW_SECTION,
+    payload: title
   }
 }
-
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk!
-
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch({
-          type    : COUNTER_DOUBLE_ASYNC,
-          payload : getState().counter
-        })
-        resolve()
-      }, 200)
-    })
-  }
-}
-*/
 
 export const actions = {
   newLeaf,
   sortLeavesList,
   selectPage,
   updateLeafData,
-  newPage
+  newPage,
+  newSection
 }
 
 function idGenerator () {
@@ -278,6 +269,16 @@ const ACTION_HANDLERS = {
             }
           }
         }
+      }
+    })
+  },
+  [NEW_SECTION]      : (state, action) => {
+    return update(state, {
+      sections: {
+        $push: [{
+          title: action.payload,
+          pages: []
+        }]
       }
     })
   }
