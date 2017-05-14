@@ -13,12 +13,8 @@ export class LeafletPage extends React.Component {
   }
 
   render () {
-    console.log('rendering page')
-    console.log(this.props.position)
-    console.log(this.props.activePage)
     let className = arrayCompare(this.props.position, this.props.activePage)
       ? 'leafletPageTitleSelected' : 'leafletPageTitle'
-    console.log(className)
     return (
       <div className={className}>
         <IconFavorite className={this.props.isFavorited ? 'leafletPageFav' : 'leafletPageFavFiller'}

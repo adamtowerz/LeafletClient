@@ -1,19 +1,8 @@
 import React from 'react'
 import './LeafletNav.scss'
 import PropTypes from 'prop-types'
-import LeafletSection from './LeafletSection.js'
+import LeafletSection from '../../containers/LeafletSectionContainer'
 import TextField from 'material-ui/TextField'
-
-/*
-props: {
- sections: [
-  {
-   title: STRING,
-   children: []
-  }
- ]
-}
-*/
 
 const styles = {
   search: {

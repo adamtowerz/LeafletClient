@@ -1,3 +1,22 @@
+.leafletSection__newPage {
+  opacity: 0.56;
+  transition-property: opacity, font-size;
+  transition-duration: 0.2s;
+}
+
+.leafletSection__newPage__iconClose {
+  opacity: 0.56;
+  padding: 0;
+}
+
+.leafletSection__newPage__iconCheck {
+  @extend .leafletSection__newPage__iconClose;
+}
+
+.leafletSection__newPage:hover {
+  opacity: 1;
+}
+
 .row {
   width: 100%;
 }

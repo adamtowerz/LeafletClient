@@ -5,10 +5,10 @@ import update from 'react-addons-update'
 // ------------------------------------
 export const NEW_LEAF = 'NEW_LEAF'
 export const SORT_LEAVES_LIST = 'SORT_LEAVES_LIST'
-
 export const DELETE_LEAF = 'DELETE_LEAF'
 export const UPDATE_LEAF_DATA = 'UPDATE_LEAF_DATA'
 
+export const NEW_PAGE = 'NEW_PAGE'
 export const SELECT_PAGE = 'SELECT_PAGE'
 export const TOGGLE_PAGE_FAV = 'TOGGLE_PAGE_FAV'
 
@@ -50,6 +50,18 @@ export function togglePageFavorite (position = false) {
     }
   } else {
     console.log('no position, impossible to selectPage')
+  }
+}
+
+export function newPage (title, sectionPosition = false) {
+  console.log('title: ' + title)
+  console.log(sectionPosition)
+  return {
+    type : NEW_PAGE,
+    payload : {
+      title: title,
+      sectionPosition: sectionPosition
+    }
   }
 }
 
@@ -95,7 +107,8 @@ export const actions = {
   newLeaf,
   sortLeavesList,
   selectPage,
-  updateLeafData
+  updateLeafData,
+  newPage
 }
 
 function idGenerator () {
@@ -191,6 +204,28 @@ const ACTION_HANDLERS = {
         }
       })
     } else {
+      return state
+    }
+  },
+  [NEW_PAGE]         : (state, action) => {
+    const position = !(action.payload.sectionPosition === false) ? action.payload.sectionPosition : state.activePage[0]
+    // the conditionals are messy as (0) is false
+    if (!(position === false)) {
+      return update(state, {
+        sections: {
+          [position]: {
+            pages: {
+              $push: [{
+                title: action.payload.title,
+                isFavorited: false,
+                leaves: []
+              }]
+            }
+          }
+        }
+      })
+    } else {
+      console.log('no position, impossible to add page')
       return state
     }
   },

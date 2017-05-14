@@ -31,6 +31,6 @@ describe('(Component) LeafletNav', () => {
   })
 
   it('Renders correct amount of children', () => {
-    expect(_component.find('LeafletSection')).to.have.length(props.sections.length)
+    expect(_component.find('Connect(LeafletSection)')).to.have.length(props.sections.length)
   })
 })
