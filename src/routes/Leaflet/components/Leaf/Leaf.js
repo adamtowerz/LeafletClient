@@ -95,6 +95,7 @@ class Leaf extends React.Component {
 
   render () {
     console.log('render leaf')
+    console.log(this.props)
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
     // fetch template from ID, apply data
@@ -102,7 +103,8 @@ class Leaf extends React.Component {
       <div style={styles.centerArea}>
         <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
-          children={fetchTemplate(this.props.leafType, this.props.leafData, this.update)}
+          children={fetchTemplate(this.props.leafType, this.props.leafData,
+            this.update, this.props.commonProps)}
         />
         <Paper style={!this.props.leafData.showTrough
           ? { ...styles.trough, ...styles.troughHidden } : styles.trough}
@@ -145,6 +147,7 @@ class Leaf extends React.Component {
 }
 
 Leaf.propTypes = {
+  commonProps : PropTypes.object.isRequired,
   leafID : PropTypes.string.isRequired,
   leafType : PropTypes.string.isRequired,
   leafData : PropTypes.object.isRequired,

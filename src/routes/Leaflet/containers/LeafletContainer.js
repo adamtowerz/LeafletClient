@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { newLeaf, sortLeavesList } from '../modules/leaflet.js'
-import { leavesSelector, activePageSelector } from './selectors'
+import { leavesSelector, activePageSelector, pageMetaSelector } from './selectors'
 // import { increment, doubleAsync } from '../modules/leaflet'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -20,6 +20,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
+  pageMeta      : pageMetaSelector(state),
   title         : state.leaflet.title,
   leaves        : leavesSelector(state),
   activePage    : activePageSelector(state)

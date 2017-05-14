@@ -6,6 +6,11 @@ export const activePageSelector = (state) => leafletSelector(state).activePage
 export const pageSelector = createSelector(activePageSelector, sectionsSelector,
   (activePage, sections) => activePage ? sections[activePage[0]].pages[activePage[1]] : false)
 
+export const pageMetaSelector = createSelector(pageSelector, (page) => ({
+  isFavorited: page.isFavorited,
+  title: page.title
+}))
+
 export const leavesSelector = createSelector(pageSelector, (page) => page ? page.leaves : [])
 
 export const leafID = (_, props) => props

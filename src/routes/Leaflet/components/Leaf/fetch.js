@@ -1,12 +1,12 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
 
-export let fetchTemplate = (type, data, update) => {
+export let fetchTemplate = (type, data, update, meta) => {
   const leafStyles = fetchStyles(type, data)
   switch (type) {
     case 'title':
       return <div style={leafStyles.titleCardBox}>
-        <span style={leafStyles.title}>{data.title}</span>
+        <span style={leafStyles.title}>{meta.title}</span>
       </div>
     case 'rawText':
       return <TextField
@@ -60,7 +60,6 @@ export let fetchStyles = (type, data) => {
 export let fetchActions = (type, data) => {
   switch (type) {
     case 'title':
-    default:
       return {
         bar: [
           {
@@ -73,6 +72,37 @@ export let fetchActions = (type, data) => {
           },
           {
             iconName: 'share',
+            onClick: function () {}
+          },
+          {
+            iconName: 'more_vert',
+            onClick: { showTrough: !data.showTrough }
+          }
+        ],
+        trough: [
+          {
+            iconName: 'delete',
+            onClick: { delete: true }
+          },
+          {
+            iconName: 'settings',
+            onClick: { }
+          }
+        ]
+      }
+    default:
+      return {
+        bar: [
+          {
+            iconName: 'bookmark',
+            onClick: { isEmphasized: !data.isEmphasized },
+            style: (data) => {
+              if (data.isEmphasized) return { color: '#4CAF50' }
+              return
+            }
+          },
+          {
+            iconName: 'games',
             onClick: function () {}
           },
           {

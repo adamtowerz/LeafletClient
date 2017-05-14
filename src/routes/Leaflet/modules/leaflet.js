@@ -209,7 +209,11 @@ const ACTION_HANDLERS = {
               $push: [{
                 title: action.payload.title,
                 isFavorited: false,
-                leaves: []
+                leaves: [{
+                  leafType: 'title',
+                  leafID: idGenerator(), // TODO: send unqiue IDs
+                  leafData: {}
+                }]
               }]
             }
           }

@@ -80,6 +80,7 @@ export default class Leaflet extends React.Component {
           <DraggableList
             itemKey='leafID'
             template={Leaf}
+            commonProps={this.props.pageMeta}
             list={this.props.leaves}
             onMoveEnd={(list, item, oldIndex, newIndex) => {
               this.props.sortLeavesList(list)
@@ -107,6 +108,7 @@ export default class Leaflet extends React.Component {
 }
 
 Leaflet.propTypes = {
+  pageMeta   : PropTypes.object.isRequired,
   leaves     : PropTypes.array.isRequired,
   newLeaf    : PropTypes.func.isRequired,
   sortLeavesList : PropTypes.func.isRequired,
