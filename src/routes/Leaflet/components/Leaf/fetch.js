@@ -1,5 +1,10 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
+import brace from 'brace'
+import AceEditor from 'react-ace'
+
+import 'brace/mode/javascript'
+import 'brace/theme/solarized_dark'
 
 export let fetchTemplate = (type, data, update, meta) => {
   const leafStyles = fetchStyles(type, data)
@@ -17,6 +22,22 @@ export let fetchTemplate = (type, data, update, meta) => {
         style={leafStyles.textFieldStyles}
         onChange={(e, nv) => {
           update({ value: nv })
+        }}
+      />
+    case 'JS':
+      return <AceEditor
+        value={data.value}
+        mode='javascript'
+        theme='solarized_dark'
+        onChange={(nv) => {
+          update({ value: nv })
+        }}
+        name='xd'
+        fontSize={16}
+        showGutter={false}
+        width='100%'
+        editorProps={{
+          $blockScrolling: true
         }}
       />
     default:

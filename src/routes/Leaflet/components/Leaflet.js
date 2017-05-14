@@ -66,6 +66,11 @@ export default class Leaflet extends React.Component {
         label='rawText'
         primary
         onTouchTap={() => this.props.newLeaf('rawText')}
+      />,
+      <FlatButton
+        label='JS'
+        primary
+        onTouchTap={() => this.props.newLeaf('JS')}
       />
     ]
     /* {(this.props.leaves.length > 0) ? this.props.leaves.map((leaf, i) => (
