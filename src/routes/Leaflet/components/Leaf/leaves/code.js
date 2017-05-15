@@ -9,7 +9,7 @@ const {
     Editor,
     EditorState,
     RichUtils,
-    Decorator,
+    // Decorator,
     convertFromRaw
 } = Draft
 
