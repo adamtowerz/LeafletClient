@@ -12,7 +12,9 @@ const styles = {
   },
   div: {
     paddingLeft: '0.5em',
-    position: 'fixed'
+    position: 'fixed',
+    display: 'block',
+    width: '20%'
   }
 }
 

@@ -73,15 +73,13 @@ export default class Leaflet extends React.Component {
         onTouchTap={() => this.props.newLeaf('JS')}
       />
     ]
-    /* {(this.props.leaves.length > 0) ? this.props.leaves.map((leaf, i) => (
-      <Leaf key={i} leafID={leaf.leafID} />
-    )) : null} */
+
     return (
       <div style={_greedy}>
-        <span style={styles.navCol}>
+        <div style={styles.navCol}>
           <LeafletNav />
-        </span>
-        <span style={styles.contentCol}>
+        </div>
+        <div style={styles.contentCol}>
           <DraggableList
             itemKey='leafID'
             template={Leaf}
@@ -91,9 +89,8 @@ export default class Leaflet extends React.Component {
               this.props.sortLeavesList(list)
             }}
             />
-        </span>
-
-        <span style={styles.dockCol} />
+        </div>
+        <div style={styles.dockCol} />
         {typeof this.props.activePage === 'object'
           ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpen}>
             <i className='material-icons titleActionIcon'>add</i>
