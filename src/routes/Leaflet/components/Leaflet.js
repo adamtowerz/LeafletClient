@@ -31,7 +31,7 @@ const styles = {
     float: 'right'
   },
   addLeafFAB: {
-    position: 'absolute',
+    position: 'fixed',
     right: '10vw',
     bottom: '10vh'
   }
