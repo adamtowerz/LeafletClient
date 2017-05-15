@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import './Leaf.scss'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'
-import { fetchTemplate, fetchActions } from './fetch.js'
+import { fetchActions, fetchComponent } from './fetch.js'
 
 const styles = {
   centerArea: {
@@ -103,7 +103,7 @@ class Leaf extends React.Component {
       <div style={styles.centerArea}>
         <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
-          children={fetchTemplate(this.props.leafType, this.props.leafData,
+          children={fetchComponent(this.props.leafType, this.props.leafData,
             this.update, this.props.commonProps)}
         />
         <Paper style={!this.props.leafData.showTrough

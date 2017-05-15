@@ -1,5 +1,5 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
+import { Editor, EditorState } from 'draft-js'
 import PropTypes from 'prop-types'
 
 export let actions = (data) => {
@@ -14,7 +14,7 @@ export let actions = (data) => {
         }
       },
       {
-        iconName: 'share',
+        iconName: 'games',
         onClick: function () {}
       },
       {
@@ -35,32 +35,24 @@ export let actions = (data) => {
   }
 }
 
-export class RawTextLeaf extends React.Component {
-  styles = {
-    textFieldStyles: {
-      width: '100%'
-    }
+export class CodeEditorLeaf extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { editorState: EditorState.createEmpty() }
+    this.onChange = (editorState) => this.setState({ editorState })
   }
 
   render () {
     return (
-      <TextField
-        value={this.props.data.value}
-        hintText='Go Type!'
-        multiLine
-        rows={5}
-        style={this.styles.textFieldStyles}
-        onChange={(e, nv) => {
-          this.props.update({ value: nv })
-        }}
-      />
+      <Editor editorState={this.state.editorState} onChange={this.onChange} />
     )
   }
 }
 
-RawTextLeaf.propTypes = {
+CodeEditorLeaf.propTypes = {
   data       : PropTypes.object.isRequired,
+  meta       : PropTypes.object.isRequired,
   update     : PropTypes.func.isRequired
 }
 
-export default RawTextLeaf
+export default CodeEditorLeaf
