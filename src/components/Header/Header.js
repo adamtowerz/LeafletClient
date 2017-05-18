@@ -31,7 +31,7 @@ export const Header = (props) => (
           targetOrigin={{ horizontal: 'right', vertical: 'top' }}
         >
           <MenuItem>
-            <IndexLink to='/' activeClassName='route--active'>
+            <IndexLink to='/home' activeClassName='route--active'>
               Home
             </IndexLink>
           </MenuItem>

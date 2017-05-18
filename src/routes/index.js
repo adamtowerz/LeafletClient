@@ -1,5 +1,6 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
+import SplashRoute from './Splash'
 import Home from './Home'
 import CounterRoute from './Counter'
 import LeafletRoute from './Leaflet'
@@ -10,10 +11,11 @@ import LeafletRoute from './Leaflet'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : Home,
+  indexRoute  : SplashRoute(store),
   childRoutes : [
     CounterRoute(store),
-    LeafletRoute(store)
+    LeafletRoute(store),
+    Home
   ]
 })
 
