@@ -26,13 +26,12 @@ const styles = {
 export const Header = (props) => {
   let leftChild = <span />
   let rightChild = <span />
-  console.log(props)
   switch (props.path) {
     case '/':
-      rightChild = <div style={styles.authButtons}>
+      /* rightChild = <div style={styles.authButtons}>
         <RaisedButton label='Signup' style={styles.signup} />
         <FlatButton label='Login' style={styles.login} />
-      </div>
+      </div> */
       break
     case '/leaflet':
       leftChild = <IconButton><NavigationMenu /></IconButton>

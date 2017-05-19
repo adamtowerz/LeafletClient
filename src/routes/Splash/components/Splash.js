@@ -1,6 +1,8 @@
 import React from 'react'
 import Logo from '../../../../public/logo.svg'
 import RaisedButton from 'material-ui/RaisedButton'
+import GoogleLogin from 'react-google-login'
+
 // import PropTypes from 'prop-types'
 let styles = {
   title: {
@@ -35,7 +37,16 @@ export const Splash = (props) => (
       <div style={styles.subtitle}>
         Notetaking, Better
       </div>
-      <RaisedButton label='Signup' primary style={styles.signup} />
+      <GoogleLogin
+        clientId='820499902692-ulb668a9g0evddeog5c4hnpi5tte4cku.apps.googleusercontent.com'
+        onSuccess={(response) => { console.log(response) }}
+        onFailure={(response) => { console.log(response) }}
+        tag='button'
+      >
+        <span>
+          Login with Google
+        </span>
+      </GoogleLogin>
     </div>
   </div>
 )
