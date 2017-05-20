@@ -1,6 +1,5 @@
 import React from 'react'
 import Logo from '../../../../public/logo.svg'
-import RaisedButton from 'material-ui/RaisedButton'
 import GoogleLogin from 'react-google-login'
 
 // import PropTypes from 'prop-types'
