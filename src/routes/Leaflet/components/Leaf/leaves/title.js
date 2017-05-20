@@ -17,20 +17,11 @@ export let actions = (data) => {
         onClick: function () {}
       },
       {
-        iconName: 'more_vert',
-        onClick: { showTrough: !data.showTrough }
-      }
-    ],
-    trough: [
-      {
-        iconName: 'delete',
-        onClick: { delete: true }
-      },
-      {
         iconName: 'settings',
         onClick: { }
       }
-    ]
+    ],
+    trough: []
   }
 }
 

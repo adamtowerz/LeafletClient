@@ -291,20 +291,26 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
+let initialState = {
   title: 'Default Title',
   sections: [
     { title: '10.3',
       pages: [
-          { title: '10.3.1 Molecular Dynamics', isFavorited: false, leaves: [] },
-          { title: '10.3.2 High Temperature Interactions', isFavorited: true, leaves: [] },
-          { title: '10.3.3 High Pressure Systems', isFavorited: false, leaves: [] }
+        { title: '10.3.1 Molecular Dynamics',
+          isFavorited: false,
+          leaves: [{
+            leafType: 'title', leafID: '792352a5-7327-f704-e51e-aa07cbec7d15', leafData :{ showTrough: false }
+          }] },
+        { title: '10.3.2 High Temperature Interactions',
+          isFavorited: true,
+          leaves: [{
+            leafType: 'title', leafID: 'b6017ab6-e7b0-5e76-0fd0-f0a44d1c546e', leafData :{ showTrough: false }
+          }] },
+        { title: '10.3.3 High Pressure Systems', isFavorited: false, leaves: [] }
       ]
     },
     { title: '10.4',
-      pages: [
-          { title: '10.4.1 Integrating Factor Technique', isFavorited: false, leaves: [] }
-      ]
+      pages: []
     }
   ],
   activePage : false // [section#, page#] section position in sections, then page position in section's page

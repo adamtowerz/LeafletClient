@@ -6,6 +6,7 @@ import _greedy from '../../../styles/greedy.js'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+import Drawer from 'material-ui/Drawer'
 
 import DraggableList from 'react-draggable-list'
 
@@ -55,15 +56,15 @@ const styles = {
 
 export default class Leaflet extends React.Component {
   state = {
-    open: false
+    openNewLeafDialog: false
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
+  handleOpenNewLeafDialog = () => {
+    this.setState({ openNewLeafDialog: true })
   }
 
-  handleClose = () => {
-    this.setState({ open: false })
+  handleCloseNewLeafDialog = () => {
+    this.setState({ openNewLeafDialog: false })
   }
 
   render () {
@@ -71,12 +72,7 @@ export default class Leaflet extends React.Component {
       <FlatButton
         label='Cancel'
         primary
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label='title'
-        primary
-        onTouchTap={() => this.props.newLeaf('title')}
+        onTouchTap={this.handleCloseNewLeafDialog}
       />,
       <FlatButton
         label='rawText'
@@ -90,18 +86,29 @@ export default class Leaflet extends React.Component {
       />
     ]
 
+    let titleLeaf
+    let leavesList = []
+    if (this.props.leaves) {
+      titleLeaf = this.props.leaves[0]
+      leavesList = this.props.leaves.slice(1)
+    }
+
     return (
       <div style={_greedy}>
         <div style={styles.navCol}>
           <LeafletNav />
         </div>
         <div style={styles.contentCol}>
+          {titleLeaf
+            ? <Leaf item={titleLeaf} commonProps={this.props.pageMeta} />
+          : null}
           <DraggableList
             itemKey='leafID'
             template={Leaf}
             commonProps={this.props.pageMeta}
-            list={this.props.leaves}
+            list={leavesList}
             onMoveEnd={(list, item, oldIndex, newIndex) => {
+              list.unshift(titleLeaf)
               this.props.sortLeavesList(list)
             }}
             />
@@ -113,18 +120,25 @@ export default class Leaflet extends React.Component {
            </div> : null}
         <div style={styles.dockCol} />
         {typeof this.props.activePage === 'object'
-          ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpen}>
+          ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpenNewLeafDialog}>
             <i className='material-icons titleActionIcon'>add</i>
           </FloatingActionButton> : null}
         <Dialog
           title='New Leaf'
           actions={actions}
           modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
+          open={this.state.openNewLeafDialog}
+          onRequestClose={this.handleCloseNewLeafDialog}
           >
             Create new Leaves Dialog
-          </Dialog>
+        </Dialog>
+        <Drawer
+          docked={false}
+          width={200}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({ open })}>
+          <div>Side Drawer</div>
+        </Drawer>
       </div>
     )
   }

@@ -118,11 +118,12 @@ class Leaf extends React.Component {
               )}
             </div>,
             <div key='right' style={styles.troughRight}>
-              {dragHandle(<IconButton style={styles.dragHandle}>
+              {this.props.dragHandle ? dragHandle(<IconButton style={styles.dragHandle}>
                 <i className='material-icons leaf__action'>
                   transform
                 </i>
-              </IconButton>)}
+              </IconButton>)
+              : null}
             </div>
           ]} />
       </div>
