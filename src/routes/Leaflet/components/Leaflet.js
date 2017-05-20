@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../../../styles/core.scss'
-import _greedy from '../../../styles/greedy.js'
+import './Leaflet.scss'
 
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Dialog from 'material-ui/Dialog'
@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Drawer from 'material-ui/Drawer'
 
 import DraggableList from 'react-draggable-list'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 import LeafletNav from '../containers/LeafletNavContainer.js'
 import Leaf from '../containers/LeafContainer.js'
@@ -24,6 +25,7 @@ const styles = {
   contentCol: {
     paddingTop: '0.5em',
     width: '60%',
+    marginLeft: '20%',
     display: 'inline-block'
   },
   dockCol: {
@@ -51,6 +53,27 @@ const styles = {
     width: '30%',
     marginLeft: '35%',
     paddingBottom: '1em'
+  },
+  noPage: {
+    position: 'absolute',
+    opacity: '0.3',
+    width: '50%',
+    marginLeft: '25%',
+    marginTop: '5vh',
+    backgroundColor: '#757575',
+    borderRadius: '24px',
+    height: '60vh',
+    fontSize: '2em',
+    fontWeight: '500',
+    textAlign: 'center',
+    zIndex: '0'
+  },
+  noPageImg: {
+    display: 'block',
+    width: '15vw',
+    margin: 'auto',
+    paddingTop: '10vh',
+    paddingBottom: '5vh'
   }
 }
 
@@ -94,10 +117,11 @@ export default class Leaflet extends React.Component {
     }
 
     return (
-      <div style={_greedy}>
+      <div>
         <div style={styles.navCol}>
           <LeafletNav />
         </div>
+
         <div style={styles.contentCol}>
           {titleLeaf
             ? <Leaf item={titleLeaf} commonProps={this.props.pageMeta} />
@@ -113,11 +137,23 @@ export default class Leaflet extends React.Component {
             }}
             />
         </div>
-        {this.props.activePage && this.props.leaves.length <= 1
-           ? <div style={styles.noLeaves}>
-             <img src={Logo} />
-             Add Some Leaves!
-           </div> : null}
+        {this.props.activePage && leavesList.length === 0 && <div key={1} style={styles.noLeaves}>
+          <img src={Logo} />
+          Add Some Leaves!
+        </div>}
+
+        <CSSTransitionGroup
+          transitionName='noPage'
+          transitionEnterTimeout={0}
+          transitionLeaveTimeout={150}>
+          {!this.props.activePage
+            ? <div key={0} style={styles.noPage}>
+              <img style={styles.noPageImg} src={Logo} />
+            Open a Page!
+          </div>
+          : null}
+        </CSSTransitionGroup>
+
         <div style={styles.dockCol} />
         {typeof this.props.activePage === 'object'
           ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpenNewLeafDialog}>

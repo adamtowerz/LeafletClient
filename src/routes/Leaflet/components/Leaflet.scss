@@ -1,0 +1,18 @@
+.noPage-leave {
+
+}
+
+.noPage-leave.noPage-leave-active {
+  transform: translatey(100%);
+  transition: all 150ms ease-in;
+}
+
+
+.noPage-enter {
+
+}
+
+.noPage-enter.noPage-enter-active {
+  transform: translatey(-100%);
+  transition: all 150ms ease-in;
+}
