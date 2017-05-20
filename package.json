@@ -111,6 +111,7 @@
     "react-ace": "^4.2.3",
     "react-addons-update": "^15.5.2",
     "react-bootstrap": "^0.30.8",
+    "react-codemirror": "^1.0.0",
     "react-dom": "^15.0.0",
     "react-draggable-list": "^3.3.0",
     "react-google-login": "^2.8.9",

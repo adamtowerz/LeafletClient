@@ -14,10 +14,6 @@ export let actions = (data) => {
         }
       },
       {
-        iconName: 'share',
-        onClick: function () {}
-      },
-      {
         iconName: 'more_vert',
         onClick: { showTrough: !data.showTrough }
       }
@@ -26,10 +22,6 @@ export let actions = (data) => {
       {
         iconName: 'delete',
         onClick: { delete: true }
-      },
-      {
-        iconName: 'place',
-        onClick: { }
       }
     ]
   }

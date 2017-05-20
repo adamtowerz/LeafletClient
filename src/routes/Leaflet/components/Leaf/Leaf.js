@@ -93,8 +93,6 @@ class Leaf extends React.Component {
   }
 
   render () {
-    console.log('render leaf')
-    console.log(this.props)
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
     // fetch template from ID, apply data
