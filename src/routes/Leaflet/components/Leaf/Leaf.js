@@ -15,7 +15,6 @@ const styles = {
     display: 'inline-block'
   },
   centerCard: {
-    height: '100%',
     width: '100%',
     display: 'block',
     zIndex: '2',
@@ -45,7 +44,6 @@ const styles = {
   },
   sideActions: {
     width: '5%',
-    height: '100%',
     float: 'right',
     display: 'inline-block'
   },
@@ -54,7 +52,6 @@ const styles = {
     padding: 0
   },
   iconCol: {
-    height: '100%',
     width: '100%',
     display: 'flex',
     justifyContent: 'space-around',
@@ -69,10 +66,12 @@ const styles = {
     width: '80%',
     display: 'flex',
     flexDirection: 'row',
-    float: 'left'
+    float: 'left',
+    color: '#9E9E9E'
   },
   troughRight: {
-    position: 'relative'
+    position: 'relative',
+    color: '#9E9E9E'
   },
   dragHandle: {
     float: 'right'

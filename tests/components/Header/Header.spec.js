@@ -1,25 +1,24 @@
 import React from 'react'
 import { Header } from 'components/Header/Header'
-import { mount } from 'enzyme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { shallow } from 'enzyme'
 // import leafletTheme from '../../src/theme'
 
 describe('(Component) Header', () => {
-  let _wrapper
+  let _wrapper, _props
   // _wrapper = shallow(<Header />)
   beforeEach(() => {
-    _wrapper = mount(<MuiThemeProvider><Header /></MuiThemeProvider>)
+    _props = {
+      title: 'xddd',
+      path: '/'
+    }
+
+    _wrapper = shallow(<Header {..._props} />)
   })
 
   describe('Appbar', () => {
     it('Should render an appbar', () => {
       const appbar = _wrapper.find('AppBar')
       expect(appbar).to.exist
-    })
-
-    it('Should contain an IconMenu', () => {
-      const iconmenu = _wrapper.find('IconMenu')
-      expect(iconmenu).to.exist
     })
   })
 })

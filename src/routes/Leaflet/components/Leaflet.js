@@ -11,6 +11,7 @@ import DraggableList from 'react-draggable-list'
 
 import LeafletNav from '../containers/LeafletNavContainer.js'
 import Leaf from '../containers/LeafContainer.js'
+import Logo from '../../../../public/logoPath.svg'
 
 const styles = {
   navCol: {
@@ -20,8 +21,8 @@ const styles = {
     float: 'left'
   },
   contentCol: {
+    paddingTop: '0.5em',
     width: '60%',
-    height: '100%',
     display: 'inline-block'
   },
   dockCol: {
@@ -34,6 +35,21 @@ const styles = {
     position: 'fixed',
     right: '10vw',
     bottom: '10vh'
+  },
+  noLeaves: {
+    opacity: '0.36',
+    textAlign: 'center',
+    width: '60%',
+    marginLeft: '20%',
+    fontSize: '2em',
+    color: 'black',
+    fill: 'black'
+  },
+  noLeavesImg: {
+    display: 'block',
+    width: '30%',
+    marginLeft: '35%',
+    paddingBottom: '1em'
   }
 }
 
@@ -90,6 +106,11 @@ export default class Leaflet extends React.Component {
             }}
             />
         </div>
+        {this.props.activePage && this.props.leaves.length <= 1
+           ? <div style={styles.noLeaves}>
+             <img src={Logo} />
+             Add Some Leaves!
+           </div> : null}
         <div style={styles.dockCol} />
         {typeof this.props.activePage === 'object'
           ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpen}>

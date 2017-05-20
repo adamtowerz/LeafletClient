@@ -8,8 +8,6 @@ import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu'
 import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
 
 const styles = {
   title: {
