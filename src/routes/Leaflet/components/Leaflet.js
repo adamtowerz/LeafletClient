@@ -105,6 +105,11 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center'
       },
+      avatar: {
+        width: 'auto',
+        height: '7vh',
+        margin: '1vh 1vw'
+      },
       chevron: {
         float: 'right'
       },
@@ -214,8 +219,7 @@ export default class Leaflet extends React.Component {
           <div style={styles.drawer.profile} >
             <Avatar
               src='http://atowers.info/graphics/selfie.png'
-              size={60}
-              style={{ margin: 10 }}
+              style={styles.drawer.user.avatar}
             />
             <div style={styles.drawer.user.core}>
               <span style={styles.drawer.user.text}>ajtowers@uw.edu</span>
