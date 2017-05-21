@@ -7,6 +7,12 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import Avatar from 'material-ui/Avatar'
+
+import IconMenu from 'material-ui/IconMenu'
+import IconButton from 'material-ui/IconButton'
+import IconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 import DraggableList from 'react-draggable-list'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
@@ -55,25 +61,57 @@ const styles = {
     paddingBottom: '1em'
   },
   noPage: {
-    position: 'absolute',
-    opacity: '0.3',
-    width: '50%',
-    marginLeft: '25%',
-    marginTop: '5vh',
-    backgroundColor: '#757575',
-    borderRadius: '24px',
-    height: '60vh',
-    fontSize: '2em',
-    fontWeight: '500',
-    textAlign: 'center',
-    zIndex: '0'
+    core: {
+      position: 'absolute',
+      opacity: '0.3',
+      width: '50%',
+      marginLeft: '25%',
+      marginTop: '5vh',
+      backgroundColor: '#757575',
+      borderRadius: '24px',
+      height: '60vh',
+      fontSize: '2em',
+      fontWeight: '500',
+      textAlign: 'center',
+      zIndex: '0'
+    },
+    img: {
+      display: 'block',
+      width: '15vw',
+      margin: 'auto',
+      paddingTop: '10vh',
+      paddingBottom: '5vh'
+    }
   },
-  noPageImg: {
-    display: 'block',
-    width: '15vw',
-    margin: 'auto',
-    paddingTop: '10vh',
-    paddingBottom: '5vh'
+  drawer: {
+    profile: {
+      backgroundColor: '#616161',
+      height: '15vh'
+    },
+    leaflets: {
+
+    },
+    activeLeaflet: {
+      color: '#4CAF50'
+    },
+    user: {
+      core: {
+        color: 'white',
+        marginLeft: '5%',
+        width: '95%',
+        fontSize: '13px',
+        height: '30%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      },
+      chevron: {
+        float: 'right'
+      },
+      text: {
+        float: 'left'
+      }
+    }
   }
 }
 
@@ -147,8 +185,8 @@ export default class Leaflet extends React.Component {
           transitionEnterTimeout={0}
           transitionLeaveTimeout={150}>
           {!this.props.activePage
-            ? <div key={0} style={styles.noPage}>
-              <img style={styles.noPageImg} src={Logo} />
+            ? <div key={0} style={styles.noPage.core}>
+              <img style={styles.noPage.img} src={Logo} />
             Open a Page!
           </div>
           : null}
@@ -173,7 +211,31 @@ export default class Leaflet extends React.Component {
           width={200}
           open={this.props.openDrawer}
           onRequestChange={(open) => this.props.setDrawer(open)}>
-          <div>Side Drawer</div>
+          <div style={styles.drawer.profile} >
+            <Avatar
+              src='http://atowers.info/graphics/selfie.png'
+              size={60}
+              style={{ margin: 10 }}
+            />
+            <div style={styles.drawer.user.core}>
+              <span style={styles.drawer.user.text}>ajtowers@uw.edu</span>
+              <IconMenu
+                iconButtonElement={<IconButton><IconArrowDropDown color={'white'} /></IconButton>}
+                anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+                targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                style={styles.drawer.user.chevron}
+                >
+                <MenuItem primaryText='Settings' />
+                <MenuItem primaryText='Help' />
+                <MenuItem primaryText='Sign out' />
+              </IconMenu>
+            </div>
+          </div>
+          <div style={styles.drawer.leaflets}>
+            <MenuItem style={styles.drawer.activeLeaflet}
+              onTouchTap={() => this.props.setDrawer(false)}>Chemistry 102</MenuItem>
+            <MenuItem onTouchTap={() => this.props.setDrawer(false)}>Biology 101</MenuItem>
+          </div>
         </Drawer>
       </div>
     )

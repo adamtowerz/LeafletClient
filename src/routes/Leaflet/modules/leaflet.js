@@ -309,7 +309,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 let initialState = {
-  title: 'Default Title',
+  title: 'Chemistry 102',
   openDrawer: false,
   sections: [
     { title: '10.3',
