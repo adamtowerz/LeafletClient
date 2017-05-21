@@ -34,4 +34,6 @@ export const leafDataSelector = createSelector(leafSelector, (leaf) => {
   return leaf.leafData
 })
 
-export const openDrawerSelector = (state) => state.leaflet.openDrawer
+export const openDrawerSelector = createSelector(leafletSelector, (leaflet) => {
+  return leaflet ? leaflet.openDrawer : false
+})
