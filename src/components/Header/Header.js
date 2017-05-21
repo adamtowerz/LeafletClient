@@ -32,7 +32,9 @@ export const Header = (props) => {
       </div> */
       break
     case '/leaflet':
-      leftChild = <IconButton><NavigationMenu /></IconButton>
+      leftChild = <IconButton onClick={() => props.setDrawer(!props.openDrawer)}>
+        <NavigationMenu />
+      </IconButton>
       rightChild = <IconMenu
         iconButtonElement={<IconButton><NavigationMoreHoriz /></IconButton>}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -72,7 +74,9 @@ export const Header = (props) => {
 
 Header.propTypes = {
   title : PropTypes.string.isRequired,
-  path : PropTypes.string.isRequired
+  path : PropTypes.string.isRequired,
+  openDrawer : PropTypes.bool.isRequired,
+  setDrawer : PropTypes.func.isRequired
 }
 
 export default Header

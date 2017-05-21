@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { newLeaf, sortLeavesList } from '../modules/leaflet.js'
-import { leavesSelector, activePageSelector, pageMetaSelector } from './selectors'
+import { newLeaf, sortLeavesList, setDrawer } from '../modules/leaflet.js'
+import { leavesSelector, activePageSelector, pageMetaSelector, openDrawerSelector } from './selectors'
 // import { increment, doubleAsync } from '../modules/leaflet'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -16,14 +16,16 @@ import Leaflet from '../components/Leaflet'
 
 const mapDispatchToProps = {
   newLeaf : (type) => newLeaf(type),
-  sortLeavesList : (list) => sortLeavesList(list)
+  sortLeavesList : (list) => sortLeavesList(list),
+  setDrawer : (value) => setDrawer(value)
 }
 
 const mapStateToProps = (state) => ({
   pageMeta      : pageMetaSelector(state),
   title         : state.leaflet.title,
   leaves        : leavesSelector(state),
-  activePage    : activePageSelector(state)
+  activePage    : activePageSelector(state),
+  openDrawer    : openDrawerSelector(state)
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

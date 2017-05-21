@@ -14,6 +14,8 @@ export const TOGGLE_PAGE_FAV = 'TOGGLE_PAGE_FAV'
 
 export const NEW_SECTION = 'NEW_SECTION'
 
+export const SET_DRAWER = 'SET_DRAWER'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -93,13 +95,21 @@ export function newSection (title) {
   }
 }
 
+export function setDrawer (value) {
+  return {
+    type: SET_DRAWER,
+    payload: value
+  }
+}
+
 export const actions = {
   newLeaf,
   sortLeavesList,
   selectPage,
   updateLeafData,
   newPage,
-  newSection
+  newSection,
+  setDrawer
 }
 
 function idGenerator () {
@@ -285,6 +295,13 @@ const ACTION_HANDLERS = {
         }]
       }
     })
+  },
+  [SET_DRAWER]       : (state, action) => {
+    return update(state, {
+      openDrawer: {
+        $set: action.payload
+      }
+    })
   }
 }
 
@@ -293,6 +310,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 let initialState = {
   title: 'Default Title',
+  openDrawer: false,
   sections: [
     { title: '10.3',
       pages: [

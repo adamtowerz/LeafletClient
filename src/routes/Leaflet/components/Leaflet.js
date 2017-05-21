@@ -171,8 +171,8 @@ export default class Leaflet extends React.Component {
         <Drawer
           docked={false}
           width={200}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({ open })}>
+          open={this.props.openDrawer}
+          onRequestChange={(open) => this.props.setDrawer(open)}>
           <div>Side Drawer</div>
         </Drawer>
       </div>
@@ -185,5 +185,7 @@ Leaflet.propTypes = {
   leaves     : PropTypes.array.isRequired,
   newLeaf    : PropTypes.func.isRequired,
   sortLeavesList : PropTypes.func.isRequired,
-  activePage : PropTypes.any.isRequired // TODO: 'any' -> enum of boolean and array
+  activePage : PropTypes.any.isRequired, // TODO: 'any' -> enum of boolean and array
+  openDrawer : PropTypes.bool.isRequired,
+  setDrawer  : PropTypes.func.isRequired
 }
