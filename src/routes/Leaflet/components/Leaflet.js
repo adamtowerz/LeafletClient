@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import Avatar from 'material-ui/Avatar'
+import Subheader from 'material-ui/Subheader'
 
 import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
@@ -181,6 +182,7 @@ export default class Leaflet extends React.Component {
             </div>
           </div>
           <div style={styles.drawer.leaflets}>
+            <Subheader>My Leaflets</Subheader>
             <MenuItem style={styles.drawer.activeLeaflet}
               onTouchTap={() => this.props.setDrawer(false)}>Chemistry 102</MenuItem>
             <MenuItem onTouchTap={() => this.props.setDrawer(false)}>Biology 101</MenuItem>
