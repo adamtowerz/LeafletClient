@@ -7,3 +7,13 @@
 .leaf__action:hover {
   opacity: 1;
 }
+
+.leaf__action__side {
+  @extend .leaf__action;
+  font-size: 1.5rem;
+}
+
+.leaf__action__trough {
+  @extend .leaf__action;
+  font-size: 4vh;
+}

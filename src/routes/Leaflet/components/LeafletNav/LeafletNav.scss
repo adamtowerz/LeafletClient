@@ -1,3 +1,19 @@
+$break-small: 540px;
+
+.leafletNav__core {
+  display: inline-block;
+  position: fixed;
+  padding-left: 0.5em;
+  float: left;
+  @media screen and (max-width: $break-small) {
+    width: 30%;
+  }
+
+  @media screen and (min-width: $break-small) {
+    width: 20%;
+  }
+}
+
 .leafletSection__newPage {
   opacity: 0.2;
   transition-property: opacity, font-size;

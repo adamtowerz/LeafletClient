@@ -22,74 +22,21 @@ import Leaf from '../containers/LeafContainer.js'
 import Logo from '../../../../public/logoPath.svg'
 
 const styles = {
-  navCol: {
-    width: '20%',
-    height: '100%',
-    display: 'inline-block',
-    float: 'left'
-  },
-  contentCol: {
-    paddingTop: '0.5em',
-    width: '60%',
-    marginLeft: '20%',
-    display: 'inline-block'
-  },
-  dockCol: {
-    width: '20%',
-    height: '100%',
-    display: 'inline-block',
-    float: 'right'
-  },
   addLeafFAB: {
     position: 'fixed',
     right: '10vw',
     bottom: '10vh'
   },
   noLeaves: {
-    opacity: '0.36',
-    textAlign: 'center',
-    width: '60%',
-    marginLeft: '20%',
-    fontSize: '2em',
-    color: 'black',
-    fill: 'black'
-  },
-  noLeavesImg: {
-    display: 'block',
-    width: '30%',
-    marginLeft: '35%',
-    paddingBottom: '1em'
-  },
-  noPage: {
-    core: {
-      position: 'absolute',
-      opacity: '0.3',
-      width: '50%',
-      marginLeft: '25%',
-      marginTop: '5vh',
-      backgroundColor: '#757575',
-      borderRadius: '24px',
-      height: '60vh',
-      fontSize: '2em',
-      fontWeight: '500',
-      textAlign: 'center',
-      zIndex: '0'
-    },
     img: {
-      display: 'block',
-      width: '15vw',
-      margin: 'auto',
-      paddingTop: '10vh',
-      paddingBottom: '5vh'
+      color: 'black',
+      fill: 'black'
     }
   },
   drawer: {
     profile: {
       backgroundColor: '#616161',
       height: '15vh'
-    },
-    leaflets: {
-
     },
     activeLeaflet: {
       color: '#4CAF50'
@@ -161,11 +108,9 @@ export default class Leaflet extends React.Component {
 
     return (
       <div>
-        <div style={styles.navCol}>
-          <LeafletNav />
-        </div>
+        <LeafletNav />
 
-        <div style={styles.contentCol}>
+        <div className={'leaflet__contentCol'}>
           {titleLeaf
             ? <Leaf item={titleLeaf} commonProps={this.props.pageMeta} />
           : null}
@@ -179,25 +124,25 @@ export default class Leaflet extends React.Component {
               this.props.sortLeavesList(list)
             }}
             />
+          {this.props.activePage && leavesList.length === 0 &&
+            <div key={1} className={'leaflet__noLeaves'}>
+                Add Some Leaves!
+            </div>
+          }
+
+          <CSSTransitionGroup
+            transitionName='noPage'
+            transitionEnterTimeout={0}
+            transitionLeaveTimeout={150}>
+            {!this.props.activePage
+                ? <div key={0} className={'leaflet__noPage'}>
+                  <img style={styles.noLeaves.img} className={'leaflet__noPage__img'} src={Logo} />
+                  Open a Page!
+              </div>
+              : null}
+          </CSSTransitionGroup>
         </div>
-        {this.props.activePage && leavesList.length === 0 && <div key={1} style={styles.noLeaves}>
-          <img src={Logo} />
-          Add Some Leaves!
-        </div>}
 
-        <CSSTransitionGroup
-          transitionName='noPage'
-          transitionEnterTimeout={0}
-          transitionLeaveTimeout={150}>
-          {!this.props.activePage
-            ? <div key={0} style={styles.noPage.core}>
-              <img style={styles.noPage.img} src={Logo} />
-            Open a Page!
-          </div>
-          : null}
-        </CSSTransitionGroup>
-
-        <div style={styles.dockCol} />
         {typeof this.props.activePage === 'object'
           ? <FloatingActionButton style={styles.addLeafFAB} onTouchTap={this.handleOpenNewLeafDialog}>
             <i className='material-icons titleActionIcon'>add</i>

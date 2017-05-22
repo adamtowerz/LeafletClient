@@ -12,7 +12,7 @@ import IconAdd from 'material-ui/svg-icons/content/add'
 const styles = {
   sectionTitle: {
     fontWeight: '100',
-    fontSize: '1.3em',
+    fontSize: '1.5em',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',

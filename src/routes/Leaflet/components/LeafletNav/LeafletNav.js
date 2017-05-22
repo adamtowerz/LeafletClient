@@ -8,13 +8,10 @@ import Dialog from 'material-ui/Dialog'
 
 const styles = {
   search: {
-    width: '80%'
+    width: '100%'
   },
-  div: {
-    paddingLeft: '0.5em',
-    position: 'fixed',
-    display: 'block',
-    width: '20%'
+  newSection : {
+    fontSize: '1em'
   }
 }
 
@@ -53,7 +50,7 @@ export class LeafletNav extends React.Component {
   }
 
   render () {
-    return <div style={styles.div}>
+    return <div className={'leafletNav__core'}>
       <TextField style={styles.search}
         hintText='Search Leaflet'
       />
@@ -61,7 +58,8 @@ export class LeafletNav extends React.Component {
         <LeafletSection key={index} title={section.title}
           pages={section.pages} position={index} />
       )}
-      <FlatButton onClick={() => this.handleOpen()} label='New Section' fullWidth primary />
+      <FlatButton labelStyle={styles.newSection}
+        onClick={() => this.handleOpen()} label='New Section' fullWidth primary />
       <Dialog
         actions={[
           <FlatButton

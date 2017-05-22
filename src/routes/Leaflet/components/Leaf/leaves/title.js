@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 export let actions = (data) => {
   return {
     bar: [
-      {
+      /* {
         iconName: 'bookmark',
         onClick: { isEmphasized: !data.isEmphasized },
         style: (data) => {
           if (data.isEmphasized) return { color: '#4CAF50' }
           return
         }
-      },
+      }, */
       {
         iconName: 'share',
         onClick: function () {}
@@ -21,14 +21,14 @@ export let actions = (data) => {
         onClick: { }
       }
     ],
-    trough: []
+    trough: false
   }
 }
 
 export class TitleLeaf extends React.Component {
   styles = {
     titleCardBox: {
-      height: '10em',
+      height: '8vh',
       width: '100%',
       display: 'flex',
       flexDirection: 'column',

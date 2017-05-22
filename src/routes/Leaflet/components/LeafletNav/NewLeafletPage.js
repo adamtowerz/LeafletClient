@@ -13,7 +13,8 @@ const styles = {
     marginBottom: '1em'
   },
   newPageTextField: {
-    width: '60%'
+    width: '60%',
+    fontSize: '1rem'
   },
   newPageActionIcons: {
     padding: '0',

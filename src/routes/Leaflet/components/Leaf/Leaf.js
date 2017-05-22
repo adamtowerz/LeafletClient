@@ -23,7 +23,7 @@ const styles = {
   },
   trough: {
     position: 'relative',
-    height: '50px',
+    height: '6vh',
     width: '100%',
     display: 'block',
     zIndex: '1',
@@ -48,22 +48,28 @@ const styles = {
     display: 'inline-block'
   },
   sideAction: {
-    width: 'auto',
+    width: '1.5rem',
+    height: '1.5rem',
+    marginBottom: '0.4rem',
     padding: 0
   },
   iconCol: {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-around',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   bottomAction: {
-
+    padding: '0',
+    width: 'auto',
+    height: 'auto'
   },
   troughLeft: {
     position: 'relative',
     height: '100%',
     width: '80%',
+    marginLeft: '0.5em',
     display: 'flex',
     flexDirection: 'row',
     float: 'left',
@@ -71,10 +77,17 @@ const styles = {
   },
   troughRight: {
     position: 'relative',
-    color: '#9E9E9E'
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    height: '100%',
+    color: '#9E9E9E',
+    marginRight: '0.5em'
   },
   dragHandle: {
-    float: 'right'
+    float: 'right',
+    padding: '0',
+    width: 'auto',
+    height: 'auto'
   }
 }
 
@@ -96,14 +109,14 @@ class Leaf extends React.Component {
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
     // fetch template from ID, apply data
-    return <div id={this.props.leafID} style={{ width: '100%', minHeight: '5em', marginBottom: '1em' }}>
+    return <div id={this.props.leafID} style={{ width: '100%', minHeight: '8vh', marginBottom: '2vh' }}>
       <div style={styles.centerArea}>
         <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
           children={fetchComponent(this.props.leafType, this.props.leafData,
             this.update, this.props.commonProps)}
         />
-        <Paper style={!this.props.leafData.showTrough
+        {actions.trough ? <Paper style={!this.props.leafData.showTrough
           ? { ...styles.trough, ...styles.troughHidden } : styles.trough}
           key='trough' children={[
             <div key='left' style={styles.troughLeft}>
@@ -111,7 +124,7 @@ class Leaf extends React.Component {
                 <IconButton key={i} style={action.style
                   ? { ...styles.bottomAction, ...action.style(this.props.leafData) } : styles.bottomAction}
                   onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
-                  <i className='material-icons leaf__action'>
+                  <i className='material-icons leaf__action__trough'>
                     {action.iconName}
                   </i>
                 </IconButton>
@@ -119,13 +132,13 @@ class Leaf extends React.Component {
             </div>,
             <div key='right' style={styles.troughRight}>
               {this.props.dragHandle ? dragHandle(<IconButton style={styles.dragHandle}>
-                <i className='material-icons leaf__action'>
+                <i className='material-icons leaf__action__trough'>
                   transform
                 </i>
               </IconButton>)
               : null}
             </div>
-          ]} />
+          ]} /> : null}
       </div>
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
@@ -133,7 +146,7 @@ class Leaf extends React.Component {
             <IconButton key={i} style={action.style
               ? { ...styles.sideAction, ...action.style(this.props.leafData) } : styles.sideAction}
               onClick={() => this.props.updateLeafData(this.props.leafID, action.onClick)}>
-              <i className='material-icons leaf__action'>
+              <i style={styles.sideActionIcon} className='material-icons leaf__action__side'>
                 {action.iconName}
               </i>
             </IconButton>
