@@ -13,10 +13,6 @@ export let actions = (data) => {
         }
       }, */
       {
-        iconName: 'share',
-        onClick: function () {}
-      },
-      {
         iconName: 'settings',
         onClick: { }
       }

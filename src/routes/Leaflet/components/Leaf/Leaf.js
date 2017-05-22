@@ -37,7 +37,7 @@ const styles = {
     transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
   },
   troughHidden: {
-    top: '-50px'
+    top: '-6vh'
   },
   centerCardEmphasized: {
     borderLeft:'6px solid #4caf50'
@@ -51,6 +51,7 @@ const styles = {
     width: '1.5rem',
     height: '1.5rem',
     marginBottom: '0.4rem',
+    marginTop: '0.4rem',
     padding: 0
   },
   iconCol: {
