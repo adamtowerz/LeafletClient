@@ -9,10 +9,33 @@ module.exports = function (passport) {
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: 'http://localhost:3000/auth/google/callback'
   },
-    function (accessToken, refreshToken, profile, done) {
-      console.log(profile)
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        return done(err, user)
+    function (token, refreshToken, profile, done) {
+      User.findOne({ 'google.id' : profile.id }, function (err, user) {
+        if (err) return done(err)
+
+        if (user) {
+          console.log('found user: ' + profile.displayName)
+          // if a user is found, log them in
+          return done(null, user)
+        } else {
+          console.log('making user: ' + profile.displayName)
+          // if the user isnt in our database, create a new user
+          console.log(profile)
+          var newUser = new User()
+
+          // set all of the relevant information
+          newUser.google.id = profile.id
+          newUser.google.token = token
+          newUser.google.name = profile.displayName
+          newUser.google.email = profile.emails[0].value // pull the first email
+          newUser.google.img = profile.photos[0].value // pull the first email
+
+          // save the user
+          newUser.save().then(function (err) {
+            if (err) throw err
+            return done(null, newUser)
+          })
+        }
       })
     }
   ))

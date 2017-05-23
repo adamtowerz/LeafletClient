@@ -25,7 +25,7 @@ let styles = {
   }
 }
 
-let tryAxios = (token) => {
+/* let tryAxios = (token) => {
   axios.get('/oauthcallback')
   .then(function (response) {
     console.log(response)
@@ -33,7 +33,7 @@ let tryAxios = (token) => {
   .catch(function (error) {
     console.log(error)
   })
-}
+} */
 
 export const Splash = (props) => (
   <div style={{ margin: '0 auto', padding: '1em' }} >
@@ -48,8 +48,6 @@ export const Splash = (props) => (
         Notetaking, Better
       </div>
       <RaisedButton primary label={'Login With Google'} href={'/auth/google'} />
-      <RaisedButton secondary label='dank' onClick={() => tryAxios()} />
-
     </div>
   </div>
 )
