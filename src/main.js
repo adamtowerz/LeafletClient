@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import leafletTheme from './theme'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // ========================================================
@@ -17,15 +15,11 @@ const store = createStore(initialState)
 // ========================================================
 const MOUNT_NODE = document.getElementById('root')
 
-let render = () => {
-  const routes = require('./routes/index').default(store)
-  ReactDOM.render(
-    <MuiThemeProvider muiTheme={leafletTheme}>
-      <AppContainer store={store} routes={routes} />
-    </MuiThemeProvider>,
-    MOUNT_NODE
-  )
-}
+const routes = require('./routes/index').default(store)
+
+let node = (paramStore) => <AppContainer store={paramStore} routes={routes} />
+
+let render = () => ReactDOM.render(node(store), MOUNT_NODE)
 
 // This code is excluded from production bundle
 if (__DEV__) {

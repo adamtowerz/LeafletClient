@@ -1,28 +1,44 @@
-const express = require('express')
-const debug = require('debug')('app:server')
-const path = require('path')
-const webpack = require('webpack')
-const webpackConfig = require('../config/webpack.config')
-const project = require('../config/project.config')
-const compress = require('compression')
-const passport = require('passport')
-require('../config/passport.config')(passport)
+process.env.NODE_ENV = 'production'
+import express from 'express'
 
-var mongoose = require('mongoose')
-var configDB = require('../config/database.config')
+// server side rendering
+import React from 'react'
+import { createStore } from '../src/store/createStore'
+import { renderToString } from 'react-dom/server'
+import AppContainer from '../src/containers/AppContainer'
+
+// general
+import debug from 'debug'
+debug('app:server')
+import webpack from 'webpack'
+import webpackConfig from '../config/webpack.config'
+import webpackStats from '../dist/webpack-stats.json'
+import project from '../config/project.config'
+import compress from 'compression'
+import passport from 'passport'
+import passportConfig from '../config/passport.config'
+passportConfig(passport)
+
+// database
+import mongoose from 'mongoose'
+import configDB from '../config/database.config'
 mongoose.connect(configDB.usersURL) // connect to our database
 mongoose.Promise = require('bluebird')
-var db = mongoose.connection
+let db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function callback () {
   debug('db connection established')
 })
 
-var cookieParser = require('cookie-parser')
-var session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+// sessions
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import connectMongo from 'connect-mongo'
+const MongoStore = connectMongo(session)
 
 const app = express()
+
+/*  middleware */
 app.use(cookieParser('secrettexthere')) // read cookies (needed for auth)
 app.use(session({
   secret: 'secrettexthere',
@@ -38,6 +54,7 @@ app.use(passport.initialize())   // passport initialize middleware
 app.use(passport.session())      // passport session middleware
 app.use(compress()) // Apply gzip compression
 
+/* routes */
 // GET /api/user_data
 app.get('/api/user_data', isLoggedIn, function (req, res) {
   if (req.user === undefined) {
@@ -67,9 +84,7 @@ app.get('/auth/google/callback',
 app.get('/auth/google', function (req, res, next) {
   if (!req.user) return next()
   return res.redirect('/Leaflet')
-},
-  passport.authenticate('google',
-  { scope: ['profile', 'email'] }))
+}, passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 // route for logging out
 app.get('/logout', function (req, res) {
@@ -77,9 +92,7 @@ app.get('/logout', function (req, res) {
   res.redirect('/')
 })
 
-// ------------------------------------
 // Apply Webpack HMR Middleware
-// ------------------------------------
 if (project.env === 'development') {
   const compiler = webpack(webpackConfig)
 
@@ -96,7 +109,7 @@ if (project.env === 'development') {
   app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr'
   }))
-
+  // Serve Public if Dev
   // Serve static assets from ~/public since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
@@ -104,29 +117,15 @@ if (project.env === 'development') {
   app.use(express.static(project.paths.public()))
 
   // This rewrites all routes requests to the root /index.html file
-  // (ignoring file requests). If you want to implement universal
-  // rendering, you'll want to remove this middleware.
   app.get('/', function (req, res, next) {
-    const filename = path.join(compiler.outputPath, 'index.html')
-    compiler.outputFileSystem.readFile(filename, (err, result) => {
-      if (err) {
-        return next(err)
-      }
-      res.set('content-type', 'text/html')
-      res.send(result)
-      res.end()
-    })
+    res.send(handleRender(req, res))
+    res.end()
   })
+
+  // This ensures all non / routes are authenticated
   app.get('*', isLoggedIn, function (req, res, next) {
-    const filename = path.join(compiler.outputPath, 'index.html')
-    compiler.outputFileSystem.readFile(filename, (err, result) => {
-      if (err) {
-        return next(err)
-      }
-      res.set('content-type', 'text/html')
-      res.send(result)
-      res.end()
-    })
+    res.send(handleRender(req, res))
+    res.end()
   })
 } else {
   debug(
@@ -136,7 +135,6 @@ if (project.env === 'development') {
     'server such as nginx to serve your static files. See the "deployment" ' +
     'section in the README for more information on deployment strategies.'
   )
-
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
@@ -149,5 +147,49 @@ function isLoggedIn (req, res, next) {
   // if they aren't redirect them to the home page
   res.redirect('/')
 }
+function handleRender (req, res) {
+    // Create a new Redux store instance
+  const routes = require('../src/routes/index').default(store)
+  console.log('handle render')
+  const store = createStore({
+    profile: req.user
+  })
+  console.log(store)
 
-module.exports = app
+  // Render the component to a string
+  const html = renderToString(
+    <AppContainer store={store} routes={routes} />
+  )
+  console.log(store)
+
+  // Grab the initial state from our Redux store
+  const preloadedState = store.getState()
+
+  // Send the rendered page back to the client
+  res.send(renderFullPage(html, preloadedState))
+}
+function renderFullPage (html, preloadedState) {
+  let chunkPublic = webpackStats.chunks.app[0].publicPath
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <title>Leaflet</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
+      </head>
+      <body>
+        <div id="root" style="height: 100%">${html}</div>
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+        </script>
+        <script src="${chunkPublic}"></script>
+      </body>
+    </html>
+  `
+}
+
+app.listen(project.server_port)
+debug(`Server is now running at http://localhost:${project.server_port}.`)

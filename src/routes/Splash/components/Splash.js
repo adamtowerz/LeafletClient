@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import Logo from '../../../../public/logo.svg'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -24,16 +23,6 @@ let styles = {
     display: 'inline-block'
   }
 }
-
-/* let tryAxios = (token) => {
-  axios.get('/oauthcallback')
-  .then(function (response) {
-    console.log(response)
-  })
-  .catch(function (error) {
-    console.log(error)
-  })
-} */
 
 export const Splash = (props) => (
   <div style={{ margin: '0 auto', padding: '1em' }} >

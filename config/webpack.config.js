@@ -56,16 +56,6 @@ webpackConfig.externals['react/addons'] = true
 // ------------------------------------
 webpackConfig.plugins = [
   new webpack.DefinePlugin(project.globals),
-  new HtmlWebpackPlugin({
-    template : project.paths.client('index.html'),
-    hash     : false,
-    favicon  : project.paths.public('favicon.ico'),
-    filename : 'index.html',
-    inject   : 'body',
-    minify   : {
-      collapseWhitespace : true
-    }
-  }),
   new BundleTrackerPlugin({ filename: 'dist/webpack-stats.json' })
 ]
 
