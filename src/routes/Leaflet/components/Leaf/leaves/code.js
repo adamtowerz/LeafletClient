@@ -1,24 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CodeMirror from 'react-codemirror'
-import '../../../../../../node_modules/codemirror/lib/codemirror.css'
+import './codeLeaf.scss'
 import '../../../../../../node_modules/codemirror/mode/javascript/javascript.js'
 
 export let actions = (data) => {
   return {
     bar: [
-      {
-        iconName: 'bookmark',
-        onClick: { isEmphasized: !data.isEmphasized },
-        style: (data) => {
-          if (data.isEmphasized) return { color: '#4CAF50' }
-          return
-        }
-      },
-      {
-        iconName: 'games',
-        onClick: function () {}
-      },
       {
         iconName: 'more_vert',
         onClick: { showTrough: !data.showTrough }
@@ -28,10 +16,6 @@ export let actions = (data) => {
       {
         iconName: 'delete',
         onClick: { delete: true }
-      },
-      {
-        iconName: 'place',
-        onClick: { }
       }
     ]
   }
@@ -41,11 +25,19 @@ export class CodeEditorLeaf extends React.Component {
   render () {
     let options = {
       lineNumbers: true,
-      mode: 'javascript'
+      mode: 'javascript',
+      theme: 'monokai',
+      viewportMargin: Infinity
     }
-    return <CodeMirror value={this.props.data.code} onChange={(nv) => {
-      this.props.update({ code: nv })
-    }} options={options} />
+    let style = {
+      minHeight: '4vh',
+      padding: '0.2em'
+    }
+    return <div style={style}>
+      <CodeMirror value={this.props.data.code} style={style} onChange={(nv) => {
+        this.props.update({ code: nv })
+      }} options={options} />
+    </div>
   }
 }
 

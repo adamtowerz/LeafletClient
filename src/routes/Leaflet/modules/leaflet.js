@@ -27,7 +27,7 @@ export function newLeaf (leafType = 'title') {
 }
 
 export function sortLeavesList (list) {
-  return {
+  return { // TODO refactor into an actual list reordering
     type    : SORT_LEAVES_LIST,
     payload : {
       list: list

@@ -23,21 +23,21 @@ const styles = {
   },
   trough: {
     position: 'relative',
-    height: '6vh',
-    width: '100%',
+    height: '4vh',
     display: 'block',
+    visibility: 'visible',
     zIndex: '1',
     backgroundColor: '#424242',
-    top: '0px',
+    bottom: '0vh',
     borderRadius: '0px',
     borderBottomRightRadius: '2px',
     borderBottomLeftRadius: '2px',
-    transitionProperty: 'top',
+    transitionProperty: 'bottom',
     transitionDuration: '.5s',
     transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
   },
   troughHidden: {
-    top: '-6vh'
+    bottom: '4vh'
   },
   centerCardEmphasized: {
     borderLeft:'6px solid #4caf50'
@@ -84,7 +84,7 @@ const styles = {
     color: '#9E9E9E',
     marginRight: '0.5em'
   },
-  dragHandle: {
+  dragHandleTrough: {
     float: 'right',
     padding: '0',
     width: 'auto',
@@ -110,7 +110,7 @@ class Leaf extends React.Component {
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
     // fetch template from ID, apply data
-    return <div id={this.props.leafID} style={{ width: '100%', minHeight: '8vh', marginBottom: '2vh' }}>
+    return <div id={this.props.leafID} style={{ width: '100%', minHeight: '4vh', marginBottom: '1vh' }}>
       <div style={styles.centerArea}>
         <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
@@ -132,7 +132,7 @@ class Leaf extends React.Component {
               )}
             </div>,
             <div key='right' style={styles.troughRight}>
-              {this.props.dragHandle ? dragHandle(<IconButton style={styles.dragHandle}>
+              {this.props.dragHandle ? dragHandle(<IconButton style={styles.dragHandleTrough}>
                 <i className='material-icons leaf__action__trough'>
                   transform
                 </i>
@@ -152,6 +152,11 @@ class Leaf extends React.Component {
               </i>
             </IconButton>
           )}
+          {actions.dragHandleBar ? dragHandle(<IconButton style={styles.sideAction}>
+            <i style={styles.sideActionIcon} className='material-icons leaf__action__side'>
+              transform
+            </i>
+          </IconButton>) : null}
         </div>
         } />
     </div>

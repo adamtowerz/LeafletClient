@@ -30,7 +30,8 @@ export let actions = (data) => {
 export class RawTextLeaf extends React.Component {
   styles = {
     textFieldStyles: {
-      width: '100%'
+      width: '98%',
+      margin: '1%'
     }
   }
 
@@ -40,7 +41,7 @@ export class RawTextLeaf extends React.Component {
         value={this.props.data.value}
         hintText='Go Type!'
         multiLine
-        rows={5}
+        rows={1}
         style={this.styles.textFieldStyles}
         onChange={(e, nv) => {
           this.props.update({ value: nv })

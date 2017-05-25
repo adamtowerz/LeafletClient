@@ -69,6 +69,18 @@ const styles = {
 }
 
 export default class Leaflet extends React.Component {
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state !== nextState) return true
+    if (this.props.pageMeta !== nextProps.pageMeta) return true
+    if (this.props.leaves !== nextProps.leaves) {
+      console.log('leaves changed')
+      return true
+    }
+    if (this.props.activePage !== nextProps.activePage) return true
+    if (this.props.openDrawer !== nextProps.openDrawer) return true
+    return false
+  }
+
   state = {
     openNewLeafDialog: false
   }

@@ -11,7 +11,10 @@ export const pageMetaSelector = createSelector(pageSelector, (page) => ({
   title: page.title
 }))
 
-export const leavesSelector = createSelector(pageSelector, (page) => page ? page.leaves : [])
+export const leavesSelector = createSelector(pageSelector, (page) => {
+  console.log('leaves selector')
+  return page ? page.leaves : []
+})
 
 export const leafID = (_, props) => props
 
