@@ -7,7 +7,6 @@ import leafletTheme from '../theme'
 
 class AppContainer extends Component {
   static propTypes = {
-    routes : PropTypes.object.isRequired,
     store  : PropTypes.object.isRequired
   }
 
@@ -16,8 +15,8 @@ class AppContainer extends Component {
   }
 
   render () {
-    const { routes, store } = this.props
-
+    const { store } = this.props
+    const routes = require('../routes/index').default(store)
     return (
       <MuiThemeProvider muiTheme={leafletTheme}>
         <Provider store={store}>
