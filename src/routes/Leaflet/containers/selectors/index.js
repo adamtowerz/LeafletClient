@@ -12,7 +12,6 @@ export const pageMetaSelector = createSelector(pageSelector, (page) => ({
 }))
 
 export const leavesSelector = createSelector(pageSelector, (page) => {
-  console.log('leaves selector')
   return page ? page.leaves : []
 })
 
