@@ -8,6 +8,17 @@ import IconButton from 'material-ui/IconButton'
 import { fetchActions, fetchComponent } from './fetch.js'
 
 const styles = {
+  container: {
+    width: '100%',
+    minHeight: '4vh',
+    marginBottom: '1vh',
+    transitionProperty: 'margin-bottom',
+    transitionDuration: '.5s',
+    transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
+  },
+  containerWithTrough: {
+    marginBottom: '5vh'
+  },
   centerArea: {
     height: '100%',
     width: '91%',
@@ -22,13 +33,14 @@ const styles = {
     borderLeft: ''
   },
   trough: {
-    position: 'relative',
+    position: 'absolute',
+    width: '91%',
     height: '4vh',
     display: 'block',
     visibility: 'visible',
     zIndex: '1',
     backgroundColor: '#424242',
-    bottom: '0vh',
+    bottom: '-4vh',
     borderRadius: '0px',
     borderBottomRightRadius: '2px',
     borderBottomLeftRadius: '2px',
@@ -37,7 +49,7 @@ const styles = {
     transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
   },
   troughHidden: {
-    bottom: '4vh'
+    bottom: '0'
   },
   centerCardEmphasized: {
     borderLeft:'6px solid #4caf50'
@@ -99,6 +111,7 @@ class Leaf extends React.Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
+    if (this.state !== nextState) return true
     if (this.props.leafID !== nextProps.leafID) return true
     if (this.props.leafData !== nextProps.leafData) return true
     if (this.props.dragHandle !== nextProps.dragHandle) return true
@@ -110,7 +123,8 @@ class Leaf extends React.Component {
     var actions = fetchActions(this.props.leafType, this.props.leafData)
     const dragHandle = this.props.dragHandle
     // fetch template from ID, apply data
-    return <div id={this.props.leafID} style={{ width: '100%', minHeight: '4vh', marginBottom: '1vh' }}>
+    return <div id={this.props.leafID} style={this.props.leafData.showTrough
+      ? { ...styles.container, ...styles.containerWithTrough } : styles.container}>
       <div style={styles.centerArea}>
         <Paper style={!this.props.leafData.isEmphasized ? styles.centerCard
           : { ...styles.centerCard, ...styles.centerCardEmphasized }}
