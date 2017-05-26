@@ -1,9 +1,16 @@
 import React from 'react'
-import Logo from '../../../../public/logo.svg'
+import Logo from '../../../../public/logoPathGreen.svg'
 import RaisedButton from 'material-ui/RaisedButton'
 
 // import PropTypes from 'prop-types'
 let styles = {
+  core: {
+    margin: '0 auto',
+    padding: '1em',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   title: {
     fontSize: '10vw',
     fontWeight: '100',
@@ -17,7 +24,12 @@ let styles = {
     height: '100%',
     width: '100%'
   },
-  col: {
+  left: {
+    width: '30%',
+    textAlign: 'center',
+    display: 'inline-block'
+  },
+  right: {
     width: '50%',
     textAlign: 'center',
     display: 'inline-block'
@@ -25,11 +37,11 @@ let styles = {
 }
 
 export const Splash = (props) => (
-  <div style={{ margin: '0 auto', padding: '1em' }} >
-    <div style={styles.col}>
+  <div style={styles.core} >
+    <div style={styles.left}>
       <img style={styles.logo} src={Logo} />
     </div>
-    <div style={styles.col}>
+    <div style={styles.right}>
       <div style={styles.title}>
         Leaflet
       </div>

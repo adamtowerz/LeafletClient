@@ -1,10 +1,14 @@
 import { createSelector } from 'reselect'
-export const leafletSelector = state => state.leaflet
-export const sectionsSelector = (state) => leafletSelector(state).sections
-export const activePageSelector = (state) => leafletSelector(state).activePage
+export const leafletSelector = (state) => {
+  return state.leaflet
+}
+export const sectionsSelector = (state) => state.leaflet.sections
+export const activePageSelector = (state) => state.leaflet.activePage
 
 export const pageSelector = createSelector(activePageSelector, sectionsSelector,
-  (activePage, sections) => activePage ? sections[activePage[0]].pages[activePage[1]] : false)
+  (activePage, sections) => {
+    return activePage ? sections[activePage[0]].pages[activePage[1]] : false
+  })
 
 export const pageMetaSelector = createSelector(pageSelector, (page) => ({
   isFavorited: page.isFavorited,

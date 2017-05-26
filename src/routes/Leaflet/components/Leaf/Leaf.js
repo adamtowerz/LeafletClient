@@ -11,10 +11,12 @@ const styles = {
   container: {
     width: '100%',
     minHeight: '4vh',
+    paddingTop: '1vh',
     marginBottom: '1vh',
     transitionProperty: 'margin-bottom',
     transitionDuration: '.5s',
-    transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
+    transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)',
+    lineHeight: '0'
   },
   containerWithTrough: {
     marginBottom: '5vh'
@@ -22,8 +24,9 @@ const styles = {
   centerArea: {
     height: '100%',
     width: '91%',
+    display: 'inline-block',
     margin: '0 2%',
-    display: 'inline-block'
+    lineHeight: '1.42857'
   },
   centerCard: {
     width: '100%',
@@ -49,7 +52,7 @@ const styles = {
     transitionTimingFunction: 'cubic-bezier(0, 1, 0.5, 1)'
   },
   troughHidden: {
-    bottom: '0'
+    bottom: '5px'
   },
   centerCardEmphasized: {
     borderLeft:'6px solid #4caf50'
@@ -178,11 +181,11 @@ class Leaf extends React.Component {
 }
 
 Leaf.propTypes = {
-  commonProps : PropTypes.object.isRequired,
+  commonProps : PropTypes.object,
   leafID : PropTypes.string.isRequired,
   leafType : PropTypes.string.isRequired,
   leafData : PropTypes.object.isRequired,
-  updateLeafData : PropTypes.func.isRequired,
+  updateLeafData : PropTypes.func,
   dragHandle : PropTypes.func
 }
 

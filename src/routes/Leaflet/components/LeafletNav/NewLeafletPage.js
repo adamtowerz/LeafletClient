@@ -63,7 +63,7 @@ export class NewLeafletPage extends React.Component {
           this.setState({ pageTitle: nv })
         }}
         value={this.pageTitle}
-        hintText={this.state.pageTitle ? '' : 'New Page Name'}
+        hintText={this.state.pageTitle ? '' : 'New Page'}
         // hintText not disappearing when content exists, so hardcoding for now
         errorText={this.state.errorText}
         style={styles.newPageTextField}

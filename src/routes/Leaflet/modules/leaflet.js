@@ -268,6 +268,7 @@ const ACTION_HANDLERS = {
       console.log('could not locate leaf in UPDATE_LEAF_DATA, erroring gracefully')
       return state
     }
+    console.log('updating leaf data')
     return update(state, {
       sections: {
         [active[0]]: {
@@ -309,29 +310,35 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 let initialState = {
-  title: 'Chemistry 102',
-  openDrawer: false,
-  sections: [
-    { title: '10.3',
-      pages: [
-        { title: '10.3.1 Molecular Dynamics',
-          isFavorited: false,
-          leaves: [{
-            leafType: 'title', leafID: '792352a5-7327-f704-e51e-aa07cbec7d15', leafData :{ showTrough: false }
-          }] },
-        { title: '10.3.2 High Temperature Interactions',
-          isFavorited: true,
-          leaves: [{
-            leafType: 'title', leafID: 'b6017ab6-e7b0-5e76-0fd0-f0a44d1c546e', leafData :{ showTrough: false }
-          }] },
-        { title: '10.3.3 High Pressure Systems', isFavorited: false, leaves: [] }
+  'title': 'Chemistry 102',
+  'openDrawer': false,
+  'sections': [
+    {
+      'title': '10.3',
+      'pages': [
+        {
+          'title': '10.3.1 Molecular Dynamics',
+          'isFavorited': false,
+          'leaves': []
+        },
+        {
+          'title': '10.3.2 High Temperature Interactions',
+          'isFavorited': true,
+          'leaves': []
+        },
+        {
+          'title': '10.3.3 High Pressure Systems',
+          'isFavorited': false,
+          'leaves': []
+        }
       ]
     },
-    { title: '10.4',
-      pages: []
+    {
+      'title': '10.4',
+      'pages': []
     }
   ],
-  activePage : false // [section#, page#] section position in sections, then page position in section's page
+  'activePage': false
 }
 
 export default function leafletReducer (state = initialState, action) {

@@ -29,10 +29,12 @@ export class CodeEditorLeaf extends React.Component {
       theme: 'monokai',
       viewportMargin: Infinity
     }
+
     let style = {
       minHeight: '4vh',
       padding: '0.2em'
     }
+
     return <div style={style}>
       <CodeMirror value={this.props.data.code} style={style} onChange={(nv) => {
         this.props.update({ code: nv })

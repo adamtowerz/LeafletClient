@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import '../../../styles/core.scss'
 import './Leaflet.scss'
 
+import leavesArrayCompare from '../../../helpers/leavesArrayCompare'
+import TitleLeaf from './Leaf/TitleLeaf'
+
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
@@ -70,12 +73,9 @@ const styles = {
 
 export default class Leaflet extends React.Component {
   shouldComponentUpdate (nextProps, nextState) {
+    if (!leavesArrayCompare(this.props.leaves, nextProps.leaves)) return true
     if (this.state !== nextState) return true
     if (this.props.pageMeta !== nextProps.pageMeta) return true
-    if (this.props.leaves !== nextProps.leaves) {
-      console.log('leaves changed')
-      return true
-    }
     if (this.props.activePage !== nextProps.activePage) return true
     if (this.props.openDrawer !== nextProps.openDrawer) return true
     return false
@@ -94,6 +94,7 @@ export default class Leaflet extends React.Component {
   }
 
   render () {
+    console.log('render functon')
     const actions = [
       <FlatButton
         label='Cancel'
@@ -112,11 +113,12 @@ export default class Leaflet extends React.Component {
       />
     ]
 
-    let titleLeaf
     let leavesList = []
     if (this.props.leaves) {
-      titleLeaf = this.props.leaves[0]
-      leavesList = this.props.leaves.slice(1)
+      leavesList = this.props.leaves.map((e, i) => {
+        e.key = i
+        return e
+      })
     }
 
     return (
@@ -124,16 +126,15 @@ export default class Leaflet extends React.Component {
         <LeafletNav />
 
         <div className={'leaflet__contentCol'}>
-          {titleLeaf
-            ? <Leaf item={titleLeaf} commonProps={this.props.pageMeta} />
+          {this.props.activePage
+            ? <TitleLeaf pageMeta={this.props.pageMeta} />
           : null}
           <DraggableList
-            itemKey='leafID'
+            itemKey='key'
             template={Leaf}
             commonProps={this.props.pageMeta}
             list={leavesList}
             onMoveEnd={(list, item, oldIndex, newIndex) => {
-              list.unshift(titleLeaf)
               this.props.sortLeavesList(list)
             }}
             />
