@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import './Leaf.scss'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const styles = {
   container: {
@@ -18,6 +20,7 @@ const styles = {
     lineHeight: '0'
   },
   centerArea: {
+    overflow: 'hidden',
     height: '100%',
     width: '91%',
     display: 'inline-block',
@@ -25,6 +28,7 @@ const styles = {
     lineHeight: '1.42857'
   },
   centerCard: {
+    height: '8vh',
     width: '100%',
     display: 'block',
     zIndex: '2',
@@ -54,6 +58,7 @@ const styles = {
     alignItems: 'center'
   },
   titleCardBox: {
+    position: 'absolute',
     height: '8vh',
     width: '100%',
     display: 'flex',
@@ -70,48 +75,71 @@ const styles = {
     textOverflow: 'ellipsis',
     width: '100%',
     textAlign: 'center'
-  }
-}
-const actions = {
-  bar: [
-    /* {
-      iconName: 'bookmark',
-      onClick: { isEmphasized: !data.isEmphasized },
-      style: (data) => {
-        if (data.isEmphasized) return { color: '#4CAF50' }
-        return
-      }
-    }, */
-    {
-      iconName: 'settings',
-      onClick: { }
+  },
+  settings: {
+    container: {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
+      transform: 'translateX(110%)'
+    },
+    containerShow: {
+      transform: 'translateX(0%)'
+    },
+    textField: {
+      height: '8vh',
+      marginLeft: '1vw',
+      width: '50%'
+    },
+    sharingButton: {
+      float: 'right',
+      marginTop: 'calc(4vh - 18px)',
+      marginRight: '1vw'
     }
-  ],
-  trough: false
+  }
+
 }
 
 class Leaf extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      showSettings: false
+    }
+  }
+
   render () {
     // fetch template from ID, apply data
     return <div style={styles.container}>
       <div style={styles.centerArea}>
         <Paper style={styles.centerCard} children={
-          <div style={styles.titleCardBox}>
-            <span style={styles.title}>{this.props.pageMeta.title}</span>
+          <div>
+            <div style={styles.titleCardBox}>
+              <span style={styles.title}>{this.props.pageMeta.title}</span>
+            </div>
+            <Paper style={this.state.showSettings
+              ? { ...styles.settings.container, ...styles.settings.containerShow } : styles.settings.container}
+              id='settings' children={
+                <div>
+                  <TextField style={styles.settings.textField}
+                    value={this.props.pageMeta.title}
+                  />
+                  <RaisedButton label='Sharing' id='sharingButton' primary style={styles.settings.sharingButton} />
+
+                </div>
+            } />
           </div>
         }
         />
       </div>
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
-          {actions.bar.map((action, i) =>
-            <IconButton key={i} style={styles.sideAction}
-              onClick={() => {}}>
-              <i style={styles.sideActionIcon} className='material-icons leaf__action__side'>
-                {action.iconName}
-              </i>
-            </IconButton>
-          )}
+          <IconButton style={styles.sideAction}
+            onClick={() => { this.setState({ showSettings: !this.state.showSettings })}}>
+            <i style={styles.sideActionIcon} className='material-icons leaf__action__side'>
+              settings
+            </i>
+          </IconButton>
         </div>
         } />
     </div>
