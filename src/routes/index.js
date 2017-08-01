@@ -4,6 +4,7 @@ import SplashRoute from './Splash'
 import Home from './Home'
 import CounterRoute from './Counter'
 import LeafletRoute from './Leaflet'
+import LeafletRedirect from './Leaflet/leafletRedirect'
 import DashboardRoute from './Dashboard'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -16,6 +17,7 @@ export const createRoutes = (store) => ({
   childRoutes : [
     CounterRoute(store),
     LeafletRoute(store),
+    LeafletRedirect,
     DashboardRoute(store),
     Home
   ]

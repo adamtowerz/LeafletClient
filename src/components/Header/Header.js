@@ -31,6 +31,7 @@ export const Header = (props) => {
         <FlatButton label='Login' style={styles.login} />
       </div> */
       break
+    case '/Dashboard':
     case '/Leaflet':
       leftChild = <IconButton onTouchTap={(e) => {
         console.log('drawer')
@@ -54,8 +55,13 @@ export const Header = (props) => {
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to='/leaflet' activeClassName='route--active'>
+          <Link to='/Leaflet' activeClassName='route--active'>
             Leaflet
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to='/Dashboard' activeClassName='route--active'>
+            Dashboard
           </Link>
         </MenuItem>
       </IconMenu>
