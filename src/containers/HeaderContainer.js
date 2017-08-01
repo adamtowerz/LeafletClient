@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Header from '../components/Header/Header.js'
-import { openDrawerSelector } from '../routes/Leaflet/containers/selectors'
-import { setDrawer } from '../routes/Leaflet/modules/leaflet'
+import { openDrawerSelector } from '../components/Header/HeaderSelectors'
+import { setDrawer } from '../components/Header/HeaderReducer'
 
 export const leafletTitleSelector = state => {
   return state.leaflet ? state.leaflet.title : 'Leaflet'

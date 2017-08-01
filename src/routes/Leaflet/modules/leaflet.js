@@ -311,7 +311,6 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 let initialState = {
   'title': 'Chemistry 102',
-  'openDrawer': false,
   'sections': [
     {
       'title': '10.3',

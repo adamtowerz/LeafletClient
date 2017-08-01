@@ -28,38 +28,6 @@ const styles = {
       color: 'black',
       fill: 'black'
     }
-  },
-  drawer: {
-    profile: {
-      backgroundColor: '#616161',
-      height: '15vh'
-    },
-    activeLeaflet: {
-      color: '#4CAF50'
-    },
-    user: {
-      core: {
-        color: 'white',
-        marginLeft: '5%',
-        width: '95%',
-        fontSize: '13px',
-        height: '30%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      },
-      avatar: {
-        width: 'auto',
-        height: '7vh',
-        margin: '1vh 1vw'
-      },
-      chevron: {
-        float: 'right'
-      },
-      text: {
-        float: 'left'
-      }
-    }
   }
 }
 
