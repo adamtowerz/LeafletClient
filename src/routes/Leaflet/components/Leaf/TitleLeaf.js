@@ -142,7 +142,7 @@ class Leaf extends React.Component {
       <Paper style={styles.sideActions} children={
         <div style={styles.iconCol}>
           <IconButton style={styles.sideAction}
-            onClick={() => { this.setState({ showSettings: !this.state.showSettings })}}>
+            onClick={() => { this.setState({ showSettings: !this.state.showSettings }) }}>
             <i style={styles.sideActionIcon} className='material-icons leaf__action__side'>
               settings
             </i>
