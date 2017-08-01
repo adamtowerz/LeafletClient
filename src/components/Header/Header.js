@@ -31,8 +31,11 @@ export const Header = (props) => {
         <FlatButton label='Login' style={styles.login} />
       </div> */
       break
-    case '/leaflet':
-      leftChild = <IconButton onClick={() => props.setDrawer(!props.openDrawer)}>
+    case '/Leaflet':
+      leftChild = <IconButton onTouchTap={(e) => {
+        console.log('drawer')
+        props.setDrawer(!props.openDrawer)
+      }}>
         <NavigationMenu />
       </IconButton>
       rightChild = <IconMenu

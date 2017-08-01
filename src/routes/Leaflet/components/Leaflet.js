@@ -173,7 +173,9 @@ export default class Leaflet extends React.Component {
           docked={false}
           width={200}
           open={this.props.openDrawer}
-          onRequestChange={(open) => this.props.setDrawer(open)}>
+          onRequestChange={(open) => {
+            this.props.setDrawer(open)
+          }}>
           <div style={styles.drawer.profile} >
             <Avatar
               src='http://atowers.info/graphics/selfie.png'
