@@ -94,7 +94,6 @@ export default class Leaflet extends React.Component {
   }
 
   render () {
-    console.log('render functon')
     const actions = [
       <FlatButton
         label='Cancel'
