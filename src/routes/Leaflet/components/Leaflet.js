@@ -9,14 +9,6 @@ import TitleLeaf from './Leaf/TitleLeaf'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
-import Avatar from 'material-ui/Avatar'
-import Subheader from 'material-ui/Subheader'
-
-import IconMenu from 'material-ui/IconMenu'
-import IconButton from 'material-ui/IconButton'
-import IconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 import DraggableList from 'react-draggable-list'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
@@ -77,7 +69,6 @@ export default class Leaflet extends React.Component {
     if (this.state !== nextState) return true
     if (this.props.pageMeta !== nextProps.pageMeta) return true
     if (this.props.activePage !== nextProps.activePage) return true
-    if (this.props.openDrawer !== nextProps.openDrawer) return true
     return false
   }
 
@@ -169,39 +160,6 @@ export default class Leaflet extends React.Component {
           >
             Create new Leaves Dialog
         </Dialog>
-        <Drawer
-          docked={false}
-          width={200}
-          open={this.props.openDrawer}
-          onRequestChange={(open) => {
-            this.props.setDrawer(open)
-          }}>
-          <div style={styles.drawer.profile} >
-            <Avatar
-              src='http://atowers.info/graphics/selfie.png'
-              style={styles.drawer.user.avatar}
-            />
-            <div style={styles.drawer.user.core}>
-              <span style={styles.drawer.user.text}>ajtowers@uw.edu</span>
-              <IconMenu
-                iconButtonElement={<IconButton><IconArrowDropDown color={'white'} /></IconButton>}
-                anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-                targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-                style={styles.drawer.user.chevron}
-                >
-                <MenuItem primaryText='Settings' />
-                <MenuItem primaryText='Help' />
-                <MenuItem primaryText='Sign out' />
-              </IconMenu>
-            </div>
-          </div>
-          <div style={styles.drawer.leaflets}>
-            <Subheader>My Leaflets</Subheader>
-            <MenuItem style={styles.drawer.activeLeaflet}
-              onTouchTap={() => this.props.setDrawer(false)}>Chemistry 102</MenuItem>
-            <MenuItem onTouchTap={() => this.props.setDrawer(false)}>Biology 101</MenuItem>
-          </div>
-        </Drawer>
       </div>
     )
   }
@@ -212,7 +170,5 @@ Leaflet.propTypes = {
   leaves     : PropTypes.array.isRequired,
   newLeaf    : PropTypes.func.isRequired,
   sortLeavesList : PropTypes.func.isRequired,
-  activePage : PropTypes.any.isRequired, // TODO: 'any' -> enum of boolean and array
-  openDrawer : PropTypes.bool.isRequired,
-  setDrawer  : PropTypes.func.isRequired
+  activePage : PropTypes.any.isRequired // TODO: 'any' -> enum of boolean and array
 }

@@ -16,16 +16,14 @@ import Leaflet from '../components/Leaflet'
 
 const mapDispatchToProps = {
   newLeaf : (type) => newLeaf(type),
-  sortLeavesList : (list) => sortLeavesList(list),
-  setDrawer : (value) => setDrawer(value)
+  sortLeavesList : (list) => sortLeavesList(list)
 }
 
 const mapStateToProps = (state) => ({
   pageMeta      : pageMetaSelector(state),
   title         : state.leaflet.title,
   leaves        : leavesSelector(state),
-  activePage    : activePageSelector(state),
-  openDrawer    : openDrawerSelector(state)
+  activePage    : activePageSelector(state)
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

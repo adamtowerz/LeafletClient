@@ -9,6 +9,12 @@ import MenuItem from 'material-ui/MenuItem'
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu'
 import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz'
 
+import Drawer from 'material-ui/Drawer'
+import Avatar from 'material-ui/Avatar'
+import Subheader from 'material-ui/Subheader'
+
+import IconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
+
 const styles = {
   title: {
     cursor: 'pointer'
@@ -78,6 +84,39 @@ export const Header = (props) => {
       iconElementLeft={leftChild}
       iconElementRight={rightChild}
     />
+    <Drawer
+      docked={false}
+      width={200}
+      open={props.openDrawer}
+      onRequestChange={(open) => {
+        props.setDrawer(open)
+      }}>
+      <div style={styles.drawer.profile} >
+        <Avatar
+          src='http://atowers.info/graphics/selfie.png'
+          style={styles.drawer.user.avatar}
+        />
+        <div style={styles.drawer.user.core}>
+          <span style={styles.drawer.user.text}>ajtowers@uw.edu</span>
+          <IconMenu
+            iconButtonElement={<IconButton><IconArrowDropDown color={'white'} /></IconButton>}
+            anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+            targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+            style={styles.drawer.user.chevron}
+          >
+            <MenuItem primaryText='Settings' />
+            <MenuItem primaryText='Help' />
+            <MenuItem primaryText='Sign out' />
+          </IconMenu>
+        </div>
+      </div>
+      <div style={styles.drawer.leaflets}>
+        <Subheader>My Leaflets</Subheader>
+        <MenuItem style={styles.drawer.activeLeaflet}
+          onTouchTap={() => props.setDrawer(false)}>Chemistry 102</MenuItem>
+        <MenuItem onTouchTap={() => props.setDrawer(false)}>Biology 101</MenuItem>
+      </div>
+    </Drawer>
   </div>)
 }
 

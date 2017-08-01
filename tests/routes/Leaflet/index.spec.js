@@ -12,6 +12,6 @@ describe('(Route) Leaflet', () => {
   })
 
   it('Configuration should contain path `counter`', () => {
-    expect(_route.path).to.equal('leaflet')
+    expect(_route.path).to.equal('Leaflet')
   })
 })
