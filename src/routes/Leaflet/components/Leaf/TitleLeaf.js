@@ -108,6 +108,14 @@ class Leaf extends React.Component {
     }
   }
 
+  componentWillReceiveProps (nextProps) { // closes settings when title changes
+    if (nextProps.pageMeta.title !== this.props.pageMeta.title) {
+      this.setState({
+        showSettings: false
+      })
+    }
+  }
+
   render () {
     // fetch template from ID, apply data
     return <div style={styles.container}>
@@ -121,11 +129,10 @@ class Leaf extends React.Component {
               ? { ...styles.settings.container, ...styles.settings.containerShow } : styles.settings.container}
               id='settings' children={
                 <div>
-                  <TextField style={styles.settings.textField}
+                  <TextField style={styles.settings.textField} id='settingsField'
                     value={this.props.pageMeta.title}
                   />
                   <RaisedButton label='Sharing' id='sharingButton' primary style={styles.settings.sharingButton} />
-
                 </div>
             } />
           </div>
