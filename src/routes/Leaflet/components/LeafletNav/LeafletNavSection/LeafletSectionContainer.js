@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { newPage } from '../modules/leaflet.js'
+import { newPage } from '../../../leafletReducer.js'
 
-import LeafletSection from '../components/LeafletNav/LeafletSection'
+import LeafletSection from './LeafletSection'
 
 const mapDispatchToProps = {
   newPage: (title, position) => newPage(title, position)

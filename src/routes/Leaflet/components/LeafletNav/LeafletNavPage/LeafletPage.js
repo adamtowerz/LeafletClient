@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './LeafletNav.scss'
-import { arrayCompare } from '../../../../helpers'
+import '../LeafletNav.scss'
+import { arrayCompare } from '../../../../../helpers'
 import IconFavorite from 'material-ui/svg-icons/action/favorite'
 
 export class LeafletPage extends React.Component {

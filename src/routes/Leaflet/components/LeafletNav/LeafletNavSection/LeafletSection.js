@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './LeafletNav.scss'
-import LeafletPage from '../../containers/LeafletPageContainer.js'
+import '../LeafletNav.scss'
+import LeafletPage from '../LeafletNavPage/LeafletPageContainer'
 import NewLeafletPage from './NewLeafletPage'
 
 import IconButton from 'material-ui/IconButton'

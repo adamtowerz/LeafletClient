@@ -1,5 +1,5 @@
 import React from 'react'
-import { NewLeafletPage } from 'routes/Leaflet/components/LeafletNav/NewLeafletPage'
+import { NewLeafletPage } from 'routes/Leaflet/components/LeafletNav/LeafletNavSection/NewLeafletPage'
 import { bindActionCreators } from 'redux'
 import { shallow } from 'enzyme'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import './LeafletNav.scss'
 import PropTypes from 'prop-types'
-import LeafletSection from '../../containers/LeafletSectionContainer'
+import LeafletSection from './LeafletNavSection/LeafletSectionContainer'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'

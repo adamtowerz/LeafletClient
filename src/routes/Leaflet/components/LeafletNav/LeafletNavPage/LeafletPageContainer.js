@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import LeafletPage from '../components/LeafletNav/LeafletPage.js'
-import { selectPage, togglePageFavorite } from '../modules/leaflet.js'
-import { activePageSelector } from './selectors'
+import LeafletPage from './LeafletPage.js'
+import { selectPage, togglePageFavorite } from '../../../leafletReducer.js'
+import { activePageSelector } from '../../../selectors/index'
 
 const mapDispatchToProps = {
   selectPage: (position) => selectPage(position),

@@ -13,8 +13,8 @@ import FlatButton from 'material-ui/FlatButton'
 import DraggableList from 'react-draggable-list'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
-import LeafletNav from '../containers/LeafletNavContainer.js'
-import Leaf from '../containers/LeafContainer.js'
+import LeafletNav from './LeafletNav/LeafletNavContainer.js'
+import Leaf from './Leaf/LeafContainer.js'
 import Logo from '../../../../public/logoPath.svg'
 
 const styles = {

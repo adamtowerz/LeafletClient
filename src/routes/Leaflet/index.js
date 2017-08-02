@@ -9,8 +9,8 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Leaflet = require('./containers/LeafletContainer').default
-      const reducer = require('./modules/leaflet').default
+      const Leaflet = require('./components/LeafletContainer').default
+      const reducer = require('./leafletReducer').default
 
       /*  Add the reducer to the store on key 'leaflet'  */
       injectReducer(store, { key: 'leaflet', reducer })

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { newLeaf, sortLeavesList, setDrawer } from '../modules/leaflet.js'
-import { leavesSelector, activePageSelector, pageMetaSelector, openDrawerSelector } from './selectors'
+import { newLeaf, sortLeavesList } from '../leafletReducer.js'
+import { leavesSelector, activePageSelector, pageMetaSelector } from '../selectors/index'
 // import { increment, doubleAsync } from '../modules/leaflet'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -8,7 +8,7 @@ import { leavesSelector, activePageSelector, pageMetaSelector, openDrawerSelecto
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import Leaflet from '../components/Leaflet'
+import Leaflet from './Leaflet'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
