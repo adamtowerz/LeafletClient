@@ -4,6 +4,7 @@ import update from 'react-addons-update'
 // Constants
 // ------------------------------------
 export const SET_DRAWER = 'SET_DRAWER'
+export const SET_TITLE = 'SET_TITLE'
 
 // ------------------------------------
 // Actions
@@ -15,8 +16,16 @@ export function setDrawer (value) {
   }
 }
 
+export function setTitle (value) {
+  return {
+    type: SET_TITLE,
+    payload: value
+  }
+}
+
 export const actions = {
-  setDrawer
+  setDrawer,
+  setTitle
 }
 
 // ------------------------------------
@@ -29,6 +38,13 @@ const ACTION_HANDLERS = {
         $set: action.payload
       }
     })
+  },
+  [SET_TITLE]       : (state, action) => {
+    return update(state, {
+      title: {
+        $set: action.payload
+      }
+    })
   }
 }
 
@@ -36,6 +52,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 let initialState = {
+  'title': 'Leaflet',
   'openDrawer': false
 }
 

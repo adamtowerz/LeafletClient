@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Header from '../../containers/HeaderContainer.js'
+import Header from '../../components/Header/HeaderContainer.js'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
