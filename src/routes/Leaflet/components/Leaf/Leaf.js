@@ -1,7 +1,6 @@
-import React from 'react'
 // import { CSSTransitionGroup } from 'react-transition-group'
+import React from 'react'
 import PropTypes from 'prop-types'
-// import FirstChild from '../../../../components/FirstChild'
 import './Leaf.scss'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'

@@ -1,0 +1,9 @@
+.filter__item {
+  font-size: 1.2em;
+  padding: 0.4em 1em;
+  transition: background-color 0.5s;
+}
+
+.filter__item:hover {
+  background-color: #BDBDBD;
+}
