@@ -22,29 +22,18 @@ const styles = {
   }
 }
 
-const leaflets = [{
-  title: 'Biology 161',
-  color: '#F19393'
-}, {
-  title: 'Physics 160',
-  color: '#7ED2FA'
-},
-{
-  title: 'CSE 142',
-  color: '#D692FC'
-}]
-
 export const ContentPanel = (props) => (
   <div style={styles.content}>
-    <div style={styles.filterLabel}>Recent Leaflets</div>
+    <div style={styles.filterLabel}>{props.filterType}</div>
     <div style={styles.leafletsContainer}>
-      {leaflets.map((card, i) => <LeafletCard title={card.title} color={card.color} />)}
+      {props.leaflets.map((card, i) => <LeafletCard key={i} title={card.title} color={card.color} />)}
     </div>
   </div>
 )
 
 ContentPanel.propTypes = {
-
+  filterType: PropTypes.string.isRequired,
+  leaflets: PropTypes.array.isRequired
 }
 
 export default ContentPanel

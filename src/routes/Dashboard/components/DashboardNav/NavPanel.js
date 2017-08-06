@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './NavPanel.scss'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
+import FilterButton from './FilterButtonContainer'
 
 const styles = {
   container: {
@@ -20,35 +20,32 @@ const styles = {
       display: 'inline-block',
       width: '100%'
     }
-  },
-  filter: {
-    icon: {
-      verticalAlign: 'middle'
-    }
   }
 }
 
-export const NavPanel = (props) => (
-  <div style={styles.container}>
-    <Paper style={styles.search.container} children={
-      <div>
-        <TextField style={styles.search.textField} hintText='Search' />
-      </div>
-    } />
-    <div className='filter__item'>
-      <i style={styles.filter.icon} className='material-icons'>access_time</i> Recent
+class NavPanel extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+    }
+  }
+
+  render () {
+    return <div style={styles.container}>
+      <Paper style={styles.search.container} children={
+        <div>
+          <TextField style={styles.search.textField} hintText='Search' />
+        </div>
+      } />
+      <FilterButton type='Recent' icon='access_time' />
+      <FilterButton type='Favorites' icon='favorite' />
+      <FilterButton type='Shared With Me' icon='share' />
     </div>
-    <div className='filter__item'>
-      <i style={styles.filter.icon} className='material-icons'>favorite</i> Favorites
-    </div>
-    <div className='filter__item'>
-      <i style={styles.filter.icon} className='material-icons'>share</i> Shared With Me
-    </div>
-  </div>
-)
+  }
+}
 
 NavPanel.propTypes = {
-  dank: PropTypes.bool
+
 }
 
 export default NavPanel

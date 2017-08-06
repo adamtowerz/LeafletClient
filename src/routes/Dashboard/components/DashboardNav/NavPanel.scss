@@ -2,6 +2,11 @@
   font-size: 1.2em;
   padding: 0.4em 1em;
   transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.filter__item.active {
+  background-color: #BDBDBD;
 }
 
 .filter__item:hover {
