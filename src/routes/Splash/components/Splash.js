@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../../../public/logoPathGreen.svg'
+import Logo from '../../../../public/leafGradient.svg'
 import RaisedButton from 'material-ui/RaisedButton'
 
 // import PropTypes from 'prop-types'

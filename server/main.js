@@ -5,11 +5,22 @@ const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+const graphqlHTTP = require('express-graphql')
+const schema = require('./schema')
 
 const app = express()
 
 // Apply gzip compression
 app.use(compress())
+
+// ------------------------------------
+// Apply Graphql Endpoint
+// ------------------------------------
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true
+}))
 
 // ------------------------------------
 // Apply Webpack HMR Middleware

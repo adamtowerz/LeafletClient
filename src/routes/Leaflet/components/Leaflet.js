@@ -15,7 +15,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 import LeafletNav from './LeafletNav/LeafletNavContainer.js'
 import Leaf from './Leaf/LeafContainer.js'
-import Logo from '../../../../public/logoPath.svg'
+import Logo from '../../../../public/leafBlack.svg'
 
 const styles = {
   addLeafFAB: {
