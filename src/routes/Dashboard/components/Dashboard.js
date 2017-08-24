@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import InfoPanel from './DashboardInfo/InfoPanel'
+import InfoPanel from './DashboardInfo/InfoPanelContainer'
 import NavPanel from './DashboardNav/NavPanelContainer'
 import ContentPanel from './DashboardContent/ContentPanelContainer'
 

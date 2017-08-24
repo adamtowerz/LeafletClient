@@ -1,0 +1,96 @@
+$break-small: 540px;
+
+.leafletNav__core {
+  display: inline-block;
+  position: fixed;
+  padding-left: 0.5em;
+  float: left;
+  @media screen and (max-width: $break-small) {
+    width: 30%;
+  }
+
+  @media screen and (min-width: $break-small) {
+    width: 20%;
+  }
+}
+
+.leafletSection__newLeaflet {
+  opacity: 0.2;
+  transition-property: opacity, font-size;
+  transition-duration: 0.2s;
+}
+
+.leafletSection__newLeaflet__iconClose {
+  opacity: 0.56;
+  padding: 0;
+}
+
+.leafletSection__newLeaflet__iconCheck {
+  @extend .leafletSection__newLeaflet__iconClose;
+}
+
+.leafletSection__newLeaflet:hover {
+  opacity: 1;
+}
+
+.row {
+  width: 100%;
+}
+
+.leafletTitle {
+  font-size: 1em;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 85%;
+  transition-property: opacity, font-size;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.leafletTitle:hover {
+  // font-size: 1.1em;
+}
+
+.leafletTitle:hover .LeafletFav {
+  opacity: 0.56;
+  width: 1em !important;
+  height: 1em !important;
+}
+
+.leafletTitleSelected {
+  @extend .leafletTitle;
+  font-weight: 500;
+}
+
+.leafletTitleSelected:hover {
+  @extend .leafletTitle:hover;
+}
+
+.leafletTitle:hover .leafletFavFiller {
+  opacity: 0.2;
+}
+
+.leafletFav {
+  width: 1em !important;
+  height: 1em !important;
+  opacity: 0.4;
+  display: inline-block;
+}
+
+.leafletFav:hover {
+  opacity: 1;
+}
+
+.leafletFavFiller {
+  width: 1em !important;
+  height: 1em !important;
+  opacity: 0;
+  display: inline-block;
+}
+
+.leafletFavFiller:hover {
+ opacity: 1 !important;
+}

@@ -70,7 +70,7 @@ export const Header = (props) => {
       </div> */
       break
     case '/Dashboard':
-    case '/Leaflet':
+    case '/Notebook':
       leftChild = <IconButton onTouchTap={(e) => {
         console.log('drawer')
         props.setDrawer(!props.openDrawer)
@@ -83,18 +83,8 @@ export const Header = (props) => {
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <MenuItem>
-          <IndexLink to='/home' activeClassName='route--active'>
-            Home
-          </IndexLink>
-        </MenuItem>
-        <MenuItem>
-          <Link to='/counter' activeClassName='route--active'>
-            Counter
-          </Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to='/Leaflet' activeClassName='route--active'>
-            Leaflet
+          <Link to='/Notebook' activeClassName='route--active'>
+            Notebook
           </Link>
         </MenuItem>
         <MenuItem>

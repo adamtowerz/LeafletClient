@@ -4,7 +4,7 @@ import { openDrawerSelector } from './HeaderSelectors'
 import { setDrawer } from './HeaderReducer'
 
 export const headerTitleSelector = state => {
-  return state.header ? state.header.title : 'Leaflet'
+  return state.header ? state.header.title : 'Notebook'
 }
 
 export const locationPathSelector = state => {

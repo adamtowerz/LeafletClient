@@ -1,10 +1,8 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
 import SplashRoute from './Splash'
-import Home from './Home'
-import CounterRoute from './Counter'
-import LeafletRoute from './Leaflet'
-import LeafletRedirect from './Leaflet/leafletRedirect'
+import NotebookRoute from './Notebook'
+import NotebookRedirect from './Notebook/notebookRedirect'
 import DashboardRoute from './Dashboard'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -15,11 +13,9 @@ export const createRoutes = (store) => ({
   component   : CoreLayout,
   indexRoute  : SplashRoute(store),
   childRoutes : [
-    CounterRoute(store),
-    LeafletRoute(store),
-    LeafletRedirect,
-    DashboardRoute(store),
-    Home
+    NotebookRoute(store),
+    NotebookRedirect,
+    DashboardRoute(store)
   ]
 })
 

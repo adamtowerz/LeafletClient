@@ -1,23 +1,29 @@
 import { connect } from 'react-redux'
-// import { increment, doubleAsync } from '../modules/login'
+import { newLeaf, sortLeavesList } from '../notebookReducer.js'
+import { leavesSelector, activeLeafletSelector, leafletMetaSelector } from '../selectors/index'
+// import { increment, doubleAsync } from '../modules/leaflet'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import Splash from '../components/Splash'
+import Notebook from './Notebook'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-
+  newLeaf : (type) => newLeaf(type),
+  sortLeavesList : (list) => sortLeavesList(list)
 }
 
 const mapStateToProps = (state) => ({
-
+  leafletMeta      : leafletMetaSelector(state),
+  title            : state.notebook.title,
+  leaves           : leavesSelector(state),
+  activeLeaflet    : activeLeafletSelector(state)
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
@@ -34,4 +40,4 @@ const mapStateToProps = (state) => ({
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapDispatchToProps)(Splash)
+export default connect(mapStateToProps, mapDispatchToProps)(Notebook)

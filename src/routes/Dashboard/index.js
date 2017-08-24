@@ -23,6 +23,9 @@ export default (store) => ({
             profile(id:0) {
               notebooks {
                 title
+                author {
+                  username
+                }
                 color
               }
             }

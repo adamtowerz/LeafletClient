@@ -2,10 +2,10 @@ const {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
+  // GraphQLInt,
   GraphQLList,
-  GraphQLID,
-  GraphQLNonNull
+  GraphQLID
+  // GraphQLNonNull
 } = require('graphql/type')
 
 const data = require('./data')
@@ -29,6 +29,24 @@ const LeafType = new GraphQLObjectType({
       type: GraphQLString,
       resolve (parent) {
         return parent.leafData
+      }
+    }
+  }
+})
+
+const EditType = new GraphQLObjectType({
+  name: 'EditType',
+  fields: {
+    who: {
+      type: GraphQLString,
+      resolve (parent) {
+        return parent.who
+      }
+    },
+    when: {
+      type: GraphQLString,
+      resolve (parent) {
+        return parent.when
       }
     }
   }
@@ -64,8 +82,32 @@ const SectionType = new GraphQLObjectType({
     leaflets: {
       type: new GraphQLList(LeafletType),
       resolve (parent) {
-        return parent.pages
+        return parent.leaflets
       }
+    }
+  }
+})
+
+let ProfileType2 = new GraphQLObjectType({
+  name: 'ProfileType2',
+  fields: {
+    id: {
+      type: GraphQLString
+    },
+    username: {
+      type: GraphQLString
+    },
+    firstName: {
+      type: GraphQLString
+    },
+    lastName: {
+      type: GraphQLString
+    },
+    email: {
+      type: GraphQLString
+    },
+    avatar: {
+      type: GraphQLString
     }
   }
 })
@@ -85,6 +127,18 @@ const NotebookType = new GraphQLObjectType({
         return parent.color
       }
     },
+    author: {
+      type: ProfileType2,
+      resolve (parent) {
+        return parent.author
+      }
+    },
+    lastEdit: {
+      type: EditType,
+      resolve (parent) {
+        return parent.lastEdit
+      }
+    },
     sections: {
       type: new GraphQLList(SectionType),
       resolve (parent) {
@@ -94,7 +148,7 @@ const NotebookType = new GraphQLObjectType({
   }
 })
 
-const ProfileType = new GraphQLObjectType({
+let ProfileType = new GraphQLObjectType({
   name: 'ProfileType',
   fields: {
     id: {
@@ -117,6 +171,17 @@ const ProfileType = new GraphQLObjectType({
     },
     notebooks: {
       type: new GraphQLList(NotebookType)
+    },
+    notebook: {
+      type: NotebookType,
+      args: {
+        title: {
+          type: GraphQLString
+        }
+      },
+      resolve (parent, { title }) {
+        return parent.notebooks.find((notebook) => notebook.title === title)
+      }
     }
   }
 })
@@ -134,13 +199,14 @@ const RootType = new GraphQLObjectType({
       type: ProfileType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLID)
+          type: GraphQLID
         },
         username: {
           type: GraphQLString
         }
       },
-      resolve (parent, { id, username }) {
+      resolve (_, { id, username }) {
+        if (username) return data.find((user) => user.username === username)
         return data[id]
       }
     }

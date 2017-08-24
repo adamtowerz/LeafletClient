@@ -52,7 +52,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 let initialState = {
-  'title': 'Leaflet',
+  'title': 'Notebook',
   'openDrawer': false
 }
 

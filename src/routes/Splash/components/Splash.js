@@ -48,7 +48,7 @@ export const Splash = (props) => (
       <div style={styles.subtitle}>
         Notetaking, Better
       </div>
-      <RaisedButton primary label={'Login with Google'} />
+      <RaisedButton href='/Dashboard' primary label={'Login with Google'} />
 
     </div>
   </div>
