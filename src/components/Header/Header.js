@@ -115,7 +115,7 @@ export const Header = (props) => {
       }}>
       <div style={styles.drawer.profile} >
         <Avatar
-          src='http://atowers.info/graphics/selfie.png'
+          src='https://http://atowers.info/routes/projects/graphics/atowers.svg'
           style={styles.drawer.user.avatar}
         />
         <div style={styles.drawer.user.core}>
