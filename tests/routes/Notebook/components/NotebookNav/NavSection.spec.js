@@ -49,7 +49,7 @@ describe('(Component) NavSection', () => {
     expect(_component.find('li')).to.have.length(3)
   })
 
-  it('Renders children on new page button click', () => {
+  it('Renders NewLeaflet child on new page button click', () => {
     _component.find('IconButton').last().simulate('click')
     expect(_component.find('NewLeaflet')).to.exist
   })

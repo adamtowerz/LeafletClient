@@ -36,7 +36,8 @@ describe('(Component) NotebookNav', () => {
   })
 
   it('Renders correct amount of children', () => {
-    expect(_component.find('Connect(LeafletSection)')).to.have.length(_props.sections.length)
+    console.log('correct children ' + _component.debug())
+    expect(_component.find('Connect(NavSection)')).to.have.length(_props.sections.length)
   })
 
   describe('The New Section button...', () => {
