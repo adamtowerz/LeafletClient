@@ -46,24 +46,24 @@ export class NavSection extends React.Component {
   }
 
   toggleOpen = () => {
-    this.setState((prevState, props) => {
+    this.setState((prevState) => {
       return { isOpen: !prevState.isOpen }
     })
   }
 
   newLeafletOpen = () => {
-    this.setState((prevState, props) => {
+    this.setState((prevState) => {
       return {
-        isOpen: true,
-        newPage: !prevState.newPage
+        newLeaflet: true,
+        isOpen: true
       }
     })
   }
 
   cancelNewLeaflet = () => {
-    this.setState((prevState, props) => {
+    this.setState((prevState) => {
       return {
-        newPage: false,
+        newLeaflet: false,
         isOpen: prevState.isOpen
       }
     })
@@ -71,7 +71,7 @@ export class NavSection extends React.Component {
 
   createNewLeaflet = (title) => {
     this.props.newLeaflet(title, this.props.position)
-    this.setState((prevState, props) => {
+    this.setState((prevState) => {
       return {
         newLeaflet: false,
         isOpen: prevState.isOpen
